@@ -8,9 +8,9 @@ export enum AlertType {
   WARNING = 'warning',
 }
 
-type AlertTypeProp = 'default' | 'success' | 'danger' | 'warning'
+export type AlertTypeProp = 'default' | 'success' | 'danger' | 'warning'
 
-interface BaseAlertProps {
+export interface BaseAlertProps {
   title?: string;
   content?: string;
   alertType?: AlertTypeProp;
@@ -18,7 +18,7 @@ interface BaseAlertProps {
   onClose?: () => any;
 }
 
-type AlertProps = BaseAlertProps & React.BaseHTMLAttributes<HTMLElement>
+export type AlertProps = BaseAlertProps & React.BaseHTMLAttributes<HTMLElement>
 
 const Alert: React.FC<AlertProps> = (props) => {
   const {
@@ -34,7 +34,7 @@ const Alert: React.FC<AlertProps> = (props) => {
 
   const classes = classNames(
     'alert',
-    { [`alert-${alertType}`]: alertType }, 
+    { [`alert--${alertType}`]: alertType }, 
     { 'alert--hide': !visible },
     className,
   )
@@ -47,7 +47,7 @@ const Alert: React.FC<AlertProps> = (props) => {
   }
 
   return (
-    <div className={classes}>
+    <div data-testid="alert" className={classes}>
       <div className="alert-main">
         <h1 className="alert-title">{title}</h1>
         { closable && 
