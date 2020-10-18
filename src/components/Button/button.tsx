@@ -13,8 +13,8 @@ export enum ButtonType {
   Link = 'link',
 }
 
-type ButtonSizeProp = 'large' | 'small'
-type ButtonTypeProp = 'primary' | 'default' | 'danger' | 'link'
+export type ButtonSizeProp = 'large' | 'small'
+export type ButtonTypeProp = 'primary' | 'default' | 'danger' | 'link'
 interface BaseButtonProps {
   children: React.ReactNode;
 
@@ -26,7 +26,7 @@ interface BaseButtonProps {
 }
 type NativeButtonProps = BaseButtonProps & React.ButtonHTMLAttributes<HTMLElement>
 type AnchorButtonProps = BaseButtonProps & React.AnchorHTMLAttributes<HTMLElement>
-type ButtonProps = Partial<NativeButtonProps & AnchorButtonProps>
+export type ButtonProps = Partial<NativeButtonProps & AnchorButtonProps>
 
 const Button: React.FC<ButtonProps> = (props) => {
   const {
@@ -43,7 +43,7 @@ const Button: React.FC<ButtonProps> = (props) => {
     'btn', 
     {
       [`btn-${btnType}`]: btnType,
-      [`btn-${size}`]: size,
+      [`btn--${size}`]: size,
       'disabled': (btnType === ButtonType.Link) && disabled,
     },
     className,  // user custom className

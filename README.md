@@ -268,6 +268,16 @@ type ButtonProps = Partial<NativeButtonProps & AnchorButtonProps>
 />
 ```
 
+## 组件测试
+
+### 测试库选型
+
+Jest: https://jestjs.io/ 通用测试工具
+
+[react testing library](https://testing-library.com/docs/react-testing-library/intro): React3.3.0后官方推荐的测试库 npm `@testing-library/react`
+
+[jest-dom](https://github.com/testing-library/jest-dom#usage): 为 jest matcher 新增了对于 DOM 的断言matcher
+
 ## 知识点
 
 ### 将 css class 名组合起来
