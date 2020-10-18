@@ -245,6 +245,19 @@ type ButtonProps = Partial<NativeButtonProps & AnchorButtonProps>
 
 通过解构 props + 透传 实现.
 
+### Alert组件
+
+用于页面中展示重要的提示信息, 页面中的非浮层元素, 不会自动消失
+
+#### 功能点
+
+- 点击关闭 整个元素消失
+- 支持四种主题颜色: success, default, danger, warning
+- 可以包含标题和内容,解释更详细的警告
+- 右侧是否显示关闭按钮可配置
+
+
+
 ## 知识点
 
 ### 将 css class 名组合起来

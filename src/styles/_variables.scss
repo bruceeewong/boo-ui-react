@@ -112,7 +112,7 @@ $display-line-height:   $headings-line-height !default;
 $lead-font-size:      $font-size-base * 1.25 !default;
 $lead-font-weight:    300 !default;
 
-$small-font-size:       0.875em !default;
+$small-font-size:       $font-size-sm !default;
 $sub-sup-font-size:     0.75em !default;
 $initialism-font-size:  $small-font-size !default;
 
@@ -204,3 +204,30 @@ $btn-transition: color 0.15s ease-in-out,
                   background-color 0.15s ease-in-out, 
                   border-color 0.15s ease-in-out, 
                   box-shadow 0.15s ease-in-out !default;
+
+
+/* 提示 Alert */
+/* ========================== */
+$alert-color: $white !default;
+$alert-bg: $primary !default;
+$alert-padding-y: 0.75rem !default;
+$alert-padding-x: 1rem !default;
+
+// alert title
+$alert-title-font-size: $h6-font-size !default;
+$alert-title-font-weight: $font-weight-bold !default;
+
+// alert close icon
+$alert-icon-close-size: $font-size-sm !default;
+
+// alert content
+$alert-content-font-size: $font-size-sm !default;
+$alert-content-margin: $spacer * 0.2 0 0 !default;
+
+// alert type
+$alert-bg-default: $primary;
+$alert-bg-success: $success;
+$alert-bg-warning: $warning;
+$alert-bg-danger: $danger;
+
+
