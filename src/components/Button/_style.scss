@@ -1,0 +1,71 @@
+.btn {
+  @include button-size($btn-padding-y, $btn-padding-x, $btn-font-size, $btn-border-radius);
+  
+  display: inline-block;
+  position: relative;
+
+  border: $btn-border-width solid transparent;
+  
+  text-align: center;
+  vertical-align: middle;
+  white-space: nowrap;
+
+  font-weight: $btn-font-weight;
+  line-height: $btn-line-height;
+
+  background-image: none;
+  color: $body-color;
+  box-shadow: $btn-box-shadow;
+  transition: $btn-transition;
+
+  cursor: pointer;
+
+  &.disabled,
+  &[disabled] {
+    cursor: not-allowed;
+    opacity: $btn-disabled-opacity;
+    box-shadow: none;
+    > * {
+      pointer-events: none;
+    }
+  }
+}
+
+// button size
+.btn-lg {
+  @include button-size($btn-padding-y-lg, $btn-padding-x-lg, $btn-font-size-lg, $btn-border-radius-lg);
+}
+.btn-sm {
+  @include button-size($btn-padding-y-sm, $btn-padding-x-sm, $btn-font-size-sm, $btn-border-radius-sm);
+}
+
+// button type
+.btn-default {
+  @include button-style($white, $gray-400, $body-color, $white, $primary, $primary);
+}
+.btn-primary {
+  @include button-style($primary, $primary, $white);
+}
+.btn-danger {
+  @include button-style($danger, $danger, $white);
+}
+
+// link button
+.btn-link {
+  text-decoration: $link-decoration;
+  
+  background-color: transparent;
+  color: $btn-link-color;
+  box-shadow: none;
+  
+  &:hover {
+    text-decoration: $link-hover-decoration;
+    color: $btn-link-hover-color;
+  }
+
+  &:disabled,
+  &.disabled {
+    color: $btn-link-disabled-color;
+    pointer-events: none;
+  }
+}

@@ -167,3 +167,45 @@ $dark:      $gray-800   !default;
 @import "variables"
 ```
 
+## 组件需求分析
+
+### Button组件
+
+不同的 Button Type
+
+- Primary
+- Default
+- Danger
+- Link Button
+
+不同的 Button Size
+
+- normal
+- small
+- large
+
+Disabled状态
+
+- button disable
+- link 需要做单独处理
+
+```jsx
+<Button
+	size="lg"
+	type="primary"
+	disabled
+	href?=""
+	className?=""
+	autoFocus?=""
+	...
+>
+	prop children
+</Button>
+```
+
+## 知识点
+
+### 将 css class 名组合起来
+
+`classnames`: https://github.com/JedWatson/classnames
+

@@ -1,27 +1,26 @@
 import React from 'react';
+import Button, { ButtonType, ButtonSize } from './components/Button/button'
 
 function App() {
   return (
     <div>
-      <h1>Hello World</h1>
-      <h2>Hello World</h2>
-      <h3>Hello World</h3>
-      <h4>Hello World</h4>
-      <h5>Hello World</h5>
-      <h6>Hello World</h6>
+      <h1>Button</h1>
+      <Button size={ButtonSize.Small}>Small</Button>
+      <Button>Normal</Button>
+      <Button size={ButtonSize.Large}>Large</Button>
 
-      <code>const a = 'b'</code>
-      <p>
-        Edit <code>src/App.tsx</code> and save to reload.
-      </p>
-      <a
-        className="App-link"
-        href="https://reactjs.org"
-        target="_blank"
-        rel="noopener noreferrer"
-      >
-        Learn React
-      </a>
+      <hr/>
+
+      <Button btnType={ButtonType.Primary}>Primary</Button>
+      <Button btnType={ButtonType.Danger}>Danger</Button>
+      <Button btnType={ButtonType.Default}>Default</Button>
+      <Button btnType={ButtonType.Link} href="https://qq.com">Link</Button>
+
+      <hr/>
+
+      <Button disabled>Button</Button>
+      <Button btnType={ButtonType.Link} disabled>Link</Button>
+
     </div>
   );
 }
