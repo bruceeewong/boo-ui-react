@@ -2,8 +2,8 @@ import React from 'react'
 import classNames from 'classnames'
 
 export enum ButtonSize {
-  Large = 'lg',
-  Small = 'sm',
+  Large = 'large',
+  smallall = 'small',
 }
 
 export enum ButtonType {
@@ -13,13 +13,15 @@ export enum ButtonType {
   Link = 'link',
 }
 
+type ButtonSizeProp = 'large' | 'small'
+type ButtonTypeProp = 'primary' | 'default' | 'danger' | 'link'
 interface BaseButtonProps {
   children: React.ReactNode;
 
   className?: string;
   disabled?: boolean;
-  size?: ButtonSize;
-  btnType?: ButtonType;
+  size?: ButtonSizeProp;
+  btnType?: ButtonTypeProp;
   href?: string;
 }
 type NativeButtonProps = BaseButtonProps & React.ButtonHTMLAttributes<HTMLElement>
@@ -36,7 +38,7 @@ const Button: React.FC<ButtonProps> = (props) => {
     className,
     ...restProps
   } = props
-  // default classes: "btn btn-lg btn-primary"
+  // default classes: "btn btn-large btn-primary"
   const classes = classNames(
     'btn', 
     {

@@ -8,12 +8,12 @@ export enum AlertType {
   WARNING = 'warning',
 }
 
-type AlertTypeProps = 'default' | 'success' | 'danger' | 'warning'
+type AlertTypeProp = 'default' | 'success' | 'danger' | 'warning'
 
 interface BaseAlertProps {
   title?: string;
   content?: string;
-  alertType?: AlertTypeProps;
+  alertType?: AlertTypeProp;
   closable?: boolean;
   onClose?: () => any;
 }
