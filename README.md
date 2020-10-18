@@ -146,5 +146,24 @@ $dark:      $gray-800   !default;
 
 `!default` 关键字是sass提供，说明该变量可以被覆盖。
 
+### 跨浏览器样式统一
 
+引入 `normalize.css` https://github.com/necolas/normalize.css
+
+在其基础上, 混入预定好的 sass 变量.
+
+#### Sass知识
+
+##### Partial module
+
+`_`开头的文件在sass看来是 partial 模块，只能被导入，不可以单独的编译导出（结果为空）。
+
+使用`@import`不会额外发请求，引入的时候不需要加`_`
+
+例子
+
+```
+// 假设同层级有 _variables.scss 文件
+@import "variables"
+```
 
