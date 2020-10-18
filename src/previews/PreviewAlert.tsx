@@ -1,5 +1,5 @@
 import React from 'react';
-import Alert, { AlertType } from '../components/Alert/alert'
+import Alert from '../components/Alert/alert'
 
 function PreviewButton() {
   return (
@@ -9,10 +9,10 @@ function PreviewButton() {
       <hr/>
       <Alert title="Hello World" />
       <hr/>
-      <Alert alertType={AlertType.DEFAULT} />
-      <Alert alertType={AlertType.SUCCESS} />
-      <Alert alertType={AlertType.WARNING} />
-      <Alert alertType={AlertType.DANGER} />
+      <Alert title="default" alertType="default" />
+      <Alert title="success" alertType="success" />
+      <Alert title="warning" alertType="warning" />
+      <Alert title="danger" alertType="danger" />
       <hr/>
       <Alert title="Not Closable" closable={false} />
       <hr/>

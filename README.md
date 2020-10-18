@@ -256,7 +256,17 @@ type ButtonProps = Partial<NativeButtonProps & AnchorButtonProps>
 - 可以包含标题和内容,解释更详细的警告
 - 右侧是否显示关闭按钮可配置
 
+#### 设计
 
+```
+<Alert
+	title=""
+	content=""
+	alertType=""
+	closable={true}
+	onClose={}
+/>
+```
 
 ## 知识点
 
