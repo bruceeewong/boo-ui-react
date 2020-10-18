@@ -167,7 +167,7 @@ $dark:      $gray-800   !default;
 @import "variables"
 ```
 
-## 组件需求分析
+## 组件
 
 ### Button组件
 
@@ -202,6 +202,48 @@ Disabled状态
 	prop children
 </Button>
 ```
+
+#### disabled 状态的 css
+
+```scss
+&.disabled,
+&[disabled] {
+    cursor: not-allowed;
+    opacity: $btn-disabled-opacity;
+    box-shadow: none;
+    > * {
+        pointer-events: none;
+    }
+}
+```
+
+#### 如何导入button, a 标签 原生属性?
+
+使用 typescript  [Intersection Types 交叉类型](https://www.typescriptlang.org/docs/handbook/unions-and-intersections.html#intersection-types), 即 
+
+```
+type NewType = Type1 & Type2
+```
+
+将 `React.ButtonHTMLAttributes` 类型与 `自定义props` 结合起来.
+
+又由于 button 和 anchor 存在不同的必选参数, 所以要使用 ts 的 Util type [Partial](https://www.typescriptlang.org/docs/handbook/utility-types.html#partialtype)  将必选变为可选.
+
+结果如下:
+
+```tsx
+type NativeButtonProps = BaseButtonProps & React.ButtonHTMLAttributes<HTMLElement>
+type AnchorButtonProps = BaseButtonProps & React.AnchorHTMLAttributes<HTMLElement>
+type ButtonProps = Partial<NativeButtonProps & AnchorButtonProps>
+```
+
+#### 支持用户自定义class
+
+将props的 `className` 透传到 class 即可
+
+#### 支持事件, 其他属性
+
+通过解构 props + 透传 实现.
 
 ## 知识点
 
