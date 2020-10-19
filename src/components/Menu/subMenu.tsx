@@ -1,9 +1,9 @@
 import React, { useState,useContext } from 'react'
 import classNames from 'classnames'
-import { MenuContext } from './menu';
-import { MenuItemProps } from './menuItem';
-import { CSSTransition } from 'react-transition-group'
-import Icon from '../Icon/icon';
+import { MenuContext } from './menu'
+import { MenuItemProps } from './menuItem'
+import Transition from '../Transition/transition'
+import Icon from '../Icon/icon'
 
 export interface SubMenuProp {
   title: string;
@@ -73,17 +73,15 @@ const SubMenu: React.FC<SubMenuProp> = (props) => {
     })
 
     return (
-      <CSSTransition
+      <Transition
         in={menuOpen}
         timeout={300}
-        classNames="zoom-in-top"
-        appear
-        unmountOnExit
+        animation="zoom-in-top"
       >
         <ul className={subMenuClasses}>
           {childrenComponent}
         </ul>
-      </CSSTransition>
+      </Transition>
     )
   }
 
