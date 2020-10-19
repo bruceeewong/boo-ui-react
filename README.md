@@ -509,6 +509,14 @@ wrapper.container.append(createStyleTag())  // 然后在 wrapper 的 container �
 
 选型: StoreBook 
 
+### Storybook 添加全局样式
+
+```
+// .storybook/preview.js
+
+import '../src/styles/index.scss';
+```
+
 ### StoreBook 添加组件 story
 
 使用 storiesOf API 添加页面, 在 `add` 处添加示例名 + 示例组件
@@ -545,6 +553,23 @@ storiesOf('Button Component', module)
   .add('Button 尺寸', btnWithSize)
   .add('Button 类型', btnWithType)
 
+```
+
+### Storebook 插件系统 Addons
+
+#### Decorator
+
+全局 decorator 可以为每一个 story 页添加公共样式或代码
+
+```
+// .storybook/preview.js
+const styles = {
+  textAlign: 'center',
+}
+
+export const decorators = [
+  (Story) => <div style={styles}>{Story()}</div>
+]
 ```
 
 
