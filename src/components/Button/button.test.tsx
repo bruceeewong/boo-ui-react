@@ -1,6 +1,5 @@
 import React from 'react'
-import { render } from '@testing-library/react'
-import userEvent from '@testing-library/user-event'
+import { render, fireEvent } from '@testing-library/react'
 import Button, { ButtonProps, ButtonType, ButtonSize } from './button'
 
 describe('test Button component', () => {
@@ -18,7 +17,7 @@ describe('test Button component', () => {
 
     expect(element).toHaveClass('b-btn b-btn-default')
 
-    userEvent.click(element)
+    fireEvent.click(element)
     expect(defaultProps.onClick).toHaveBeenCalled()
   })
 
@@ -56,7 +55,7 @@ describe('test Button component', () => {
     expect(element).toBeInTheDocument()
     expect(element.disabled).toBeTruthy()
 
-    userEvent.click(element)
+    fireEvent.click(element)
     expect(testProps.onClick).not.toHaveBeenCalled()
   })
 
