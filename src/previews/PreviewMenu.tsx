@@ -1,6 +1,7 @@
 import React from 'react';
 import Menu from '../components/Menu/menu'
 import MenuItem from '../components/Menu/menuItem'
+import SubMenu from '../components/Menu/subMenu'
 
 function PreviewButton() {
   return (
@@ -13,9 +14,14 @@ function PreviewButton() {
         <MenuItem index={1} disabled>
           Item 2
         </MenuItem>
-        <MenuItem index={2}>
-          Item 3
-        </MenuItem>
+        <SubMenu index={2} title="dropdown">
+          <MenuItem index={3}>
+            Item 1
+          </MenuItem>
+          <MenuItem index={4} disabled={true}>
+            Item 2
+          </MenuItem>
+        </SubMenu>
       </Menu>
       <hr/>
 
@@ -27,9 +33,14 @@ function PreviewButton() {
         <MenuItem index={1} disabled={true}>
           Item 2
         </MenuItem>
-        <MenuItem index={2}>
-          Item 3
-        </MenuItem>
+        <SubMenu index={2} title="dropdown">
+          <MenuItem index={3}>
+            Item 1
+          </MenuItem>
+          <MenuItem index={4} disabled={true}>
+            Item 2
+          </MenuItem>
+        </SubMenu>
       </Menu>
       <hr/>
     </div>

@@ -314,6 +314,29 @@ interface MenuItemProps {
 
 使用 `React.Children.map` 循环 chilren prop, 对属性名进行过滤
 
+判断 child 是否为 React 组件: `React.FunctionComponentElement`
+
+ 子组件也许添加标识,如 `displayName` 让父组件好做判断`
+
+如果不是指定类型,抛出警告,无返回
+
+```tsx
+const renderChildren = () => {
+  return React.Children.map(children, (child, index) => {
+    const childElement = child as React.FunctionComponentElement<MenuItemProps>
+    const { displayName } = childElement.type
+    if (displayName === 'MenuItem') {
+      return child
+    } else {
+      console.error('Warning: Menu only recognizes children of MenuItem type')
+   	  return
+    }
+  })
+}
+```
+
+
+
 ## 组件测试
 
 ### 测试库选型

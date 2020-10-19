@@ -1,9 +1,8 @@
 import React from 'react'
-import { render, RenderResult, cleanup } from '@testing-library/react';
-import userEvent from '@testing-library/user-event';
+import { render, RenderResult, cleanup } from '@testing-library/react'
+import userEvent from '@testing-library/user-event'
 import Menu, { MenuProps } from './menu'
 import MenuItem from './menuItem'
-import { wrap } from 'module';
 
 const generateMenu = (props: MenuProps) => {
   return (

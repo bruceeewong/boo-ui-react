@@ -40,6 +40,7 @@ const Menu: React.FC<MenuProps> = (props) => {
 
   const classes = classNames(
     'b-menu',
+    {'b-menu--horizontal': mode === MenuMode.HORIZONTAL},
     {'b-menu--vertical': mode === MenuMode.VERTICAL},
     className,
   )
@@ -61,10 +62,11 @@ const Menu: React.FC<MenuProps> = (props) => {
     return React.Children.map(children, (child, index) => {
       const childElement = child as React.FunctionComponentElement<MenuItemProps>
       const { displayName } = childElement.type
-      if (displayName === 'MenuItem') {
+      if (displayName === 'MenuItem' || displayName === 'SubMenu') {
         return child
       } else {
-        console.error('Warning: Menu only recognizes children of MenuItem type')
+        console.error('Warning: Menu has a child which is not MenuItem type')
+        return
       }
     })
   }
