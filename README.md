@@ -497,6 +497,58 @@ const createStyleTag = (): HTMLStyleElement => {
 wrapper.container.append(createStyleTag())  // 然后在 wrapper 的 container 上加入
 ```
 
+## 展示组件
+
+> CRA create-react-app 不适合组件库开发时的展示
+
+组件完美开发工具应有特点
+
+- 分开展示各个组件不同属性下的状态
+- 能追踪组件的行为并且具有属性调试功能
+- 可以为组件自动生成文档和属性列表
+
+选型: StoreBook 
+
+### StoreBook 添加组件 story
+
+使用 storiesOf API 添加页面, 在 `add` 处添加示例名 + 示例组件
+
+```tsx
+import React from 'react'
+import { storiesOf } from '@storybook/react'
+import { action } from '@storybook/addon-actions'
+
+import Button from './button'
+
+const defaultBtn = () => (
+  <Button onClick={action('clicked')}>default button</Button>
+)
+
+const btnWithSize = () => (
+  <>
+    <Button size="small">small button</Button>
+    <Button size="large">large button</Button>
+  </>
+)
+
+const btnWithType = () => (
+  <>
+    <Button btnType="default">default button</Button>
+    <Button btnType="primary">primary button</Button>
+    <Button btnType="danger">danger button</Button>
+    <Button btnType="link" href="#">link button</Button>
+  </>
+)
+
+storiesOf('Button Component', module)
+  .add('默认 Button', defaultBtn)
+  .add('Button 尺寸', btnWithSize)
+  .add('Button 类型', btnWithType)
+
+```
+
+
+
 ## 知识点
 
 ### 将 css class 名组合起来
