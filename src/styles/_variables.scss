@@ -37,7 +37,17 @@ $warning:   $yellow     !default;
 $danger:    $red        !default;
 $light:     $gray-100   !default;
 $dark:      $gray-800   !default;
-$disabled:  $gray-600   !default;
+
+// sass map
+$theme-colors: (
+  "primary": $primary,
+  "secondary": $secondary,
+  "info": $info,
+  "warning": $warning,
+  "danger": $danger,
+  "light": $light,
+  "dark": $dark,
+);
 
 
 /* 字体系统 Font system */
@@ -117,7 +127,7 @@ $small-font-size:       $font-size-sm !default;
 $sub-sup-font-size:     0.75em !default;
 $initialism-font-size:  $small-font-size !default;
 
-$text-muted: $disabled !default;
+$text-muted: $secondary !default;
 
 // blockquote
 $blockquote-small-color:      $gray-600 !default;
@@ -194,7 +204,7 @@ $btn-border-width: $border-width !default;
 // 链接按钮
 $btn-link-color: $link-color !default;
 $btn-link-hover-color: $link-hover-color !default;
-$btn-link-disabled-color: $disabled !default;
+$btn-link-disabled-color: $secondary !default;
 
 // 按钮 Radius
 $btn-border-radius: $border-radius !default;
@@ -250,7 +260,7 @@ $menu-item-padding-y: 0.5rem !default;
 $menu-item-padding-x: 1rem !default;
 $menu-item-active-color: $primary !default;
 $menu-item-active-border-width: 2px !default;
-$menu-item-disabled-color: $disabled !default;
+$menu-item-disabled-color: $secondary !default;
 
 // sub-menu
 $submenu-box-shadow: 0 2px 4px 0 rgba(0,0,0,0.12),

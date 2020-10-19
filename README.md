@@ -268,7 +268,7 @@ type ButtonProps = Partial<NativeButtonProps & AnchorButtonProps>
 />
 ```
 
-## Menu 组件
+### Menu 组件
 
 #### 功能 
 
@@ -350,6 +350,36 @@ const renderChildren = () => {
 
 垂直模式下点击弹出子菜单
 
+### 图标ICON组件
+
+#### 历史
+
+- 上古时代 - 雪碧图(CSS Sprite)
+- 近代 - Font icon
+- 现代和未来 - SVG
+
+SVG优势
+
+- 完全可控 CSS 属性
+- SVG 即取即用, Font icon 要下载全部字体文件
+- Font Icon 还有奇怪的 Bug
+
+#### 技术选型
+
+[react-fontawesome](https://github.com/FortAwesome/react-fontawesome): Font Awesome 5 React component using SVG with JS
+
+```
+yarn add @fortawesome/fontawesome-svg-core \
+         @fortawesome/free-solid-svg-icons \
+         @fortawesome/react-fontawesome
+```
+
+### 实现
+
+包裹 fontawesome 组件, 扩展 `theme` 赋予颜色的功能
+
+通过 `theme` 添加 css 类名, 通过 sass 生成对应的 类名与 color 属性值, 即可实现. 
+
 ## 组件测试
 
 ### 测试库选型
@@ -372,10 +402,10 @@ ul.querySelectorAll(':scope > li')
 
 ### 异步断言
 
-`tesing library`提供`waitFor`工具函数,搭配 `await` 使用,将异步断言放进 waitFor 的回调参数中.
+`tesing library/react`提供`wait`工具函数,搭配 `await` 使用,将异步断言放进 waitFor 的回调参数中.
 
 ```ts
-import { tfireEvent, wait } from '@testing-library/react'
+import { fireEvent, wait } from '@testing-library/react'
 
 fireEvent.mouseLeave(dropdownElement)
 await wait(() => {
@@ -412,4 +442,30 @@ wrapper.container.append(createStyleTag())  // 然后在 wrapper 的 container �
 ### 将 css class 名组合起来
 
 `classnames`: https://github.com/JedWatson/classnames
+
+### 批量创建 css 类名
+
+使用 Sass提供的 `@each` 与 `@map` 方法
+
+通过创建 名字与 变量的 map, 再通过 each 循环取出 key, value, 来批量生成类名称与对应变量的值
+
+如批量创建icon颜色类名
+
+```scss
+$theme-colors: (
+  "primary": $primary,
+  "secondary": $secondary,
+  "info": $info,
+  "warning": $warning,
+  "danger": $danger,
+  "light": $light,
+  "dark": $dark,
+);
+
+@each $key, $val in $theme-colors {
+  .icon-#{$key} {
+    color: $val;
+  }
+}
+```
 
