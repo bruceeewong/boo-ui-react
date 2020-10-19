@@ -22,7 +22,7 @@ describe('test Alert component', () => {
     const closeIcon = wrapper.getByText('x')
     userEvent.click(closeIcon)
     // hide alert
-    expect(wrapper.queryByTestId('alert')).toHaveClass('alert--hide')
+    expect(wrapper.queryByTestId('alert')).toHaveClass('b-alert--hide')
     // call callback
     expect(testProps.onClose).toHaveBeenCalled()
   })
@@ -43,7 +43,7 @@ describe('test Alert component', () => {
       cleanup()
       let wrapper = render(<Alert alertType={alertType as AlertTypeProp} />)    
       const element = wrapper.getByTestId('alert')
-      expect(element).toHaveClass(`alert alert--${alertType}`)
+      expect(element).toHaveClass(`b-alert b-alert-${alertType}`)
     })
   })
 
@@ -54,7 +54,7 @@ describe('test Alert component', () => {
     const wrapper = render(<Alert {...testProps} />)    
     const element = wrapper.getByText('custom content')
     expect(element).toBeInTheDocument()
-    expect(element).toHaveClass('alert-content')
+    expect(element).toHaveClass('b-alert-content')
   })
   it('should not render close icon when set prop closable false', () => {
     const testProps: AlertProps = {

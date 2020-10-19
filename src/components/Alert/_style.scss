@@ -1,4 +1,4 @@
-.alert {
+.b-alert {
   position: relative;
   display: block;
 
@@ -11,40 +11,40 @@
   &--hide {
     display: none;
   }
+
+  // alert type
+  &-success {
+    background-color: $alert-bg-success;
+  }
+  &-warning {
+    background-color: $alert-bg-warning;
+  }
+  &-danger {
+    background-color: $alert-bg-danger;
+  }
 }
 
-.alert-main {
+.b-alert-main {
   display: flex;
   justify-content: space-between;
   align-items: center;
 }
 
-.alert-title {
+.b-alert-title {
   margin: 0;
 
   font-size: $alert-title-font-size;
   font-weight: $alert-title-font-weight;
 }
-.alert-content {
+.b-alert-content {
   margin: $alert-content-margin;
   font-size: $alert-content-font-size;
 }
 
-.alert-icon-close {
+.b-alert-icon-close {
   font-size: $alert-title-font-size;
   font-weight: $alert-title-font-weight;
   font-style: normal;
   
   cursor: pointer;
-}
-
-// alert type
-.alert-success {
-  background-color: $alert-bg-success;
-}
-.alert-warning {
-  background-color: $alert-bg-warning;
-}
-.alert-danger {
-  background-color: $alert-bg-danger;
 }
