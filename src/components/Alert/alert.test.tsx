@@ -1,6 +1,6 @@
 import React from 'react'
 // @ts-ignore
-import { render, cleanup, fireEvent } from '@testing-library/react';
+import { render, cleanup, fireEvent, wait } from '@testing-library/react';
 import Alert, { AlertProps, AlertTypeProp } from './alert'
 
 describe('test Alert component', () => {
@@ -9,22 +9,25 @@ describe('test Alert component', () => {
     const element = wrapper.getByTestId('alert')
     expect(element).toBeInTheDocument()
 
-    const closeIcon = wrapper.getByText('x')
+    const closeIcon = wrapper.getByTestId('alert-close')
     expect(closeIcon).toBeInTheDocument()
   })
 
-  it('should hide alert && call onClose callback when click the close icon', () => {
+  it('should hide alert && call onClose callback when click the close icon', async () => {
     const testProps = {
       onClose: jest.fn(),
     }
 
     const wrapper = render(<Alert {...testProps} />)    
-    const closeIcon = wrapper.getByText('x')
+    const closeIcon = wrapper.getByTestId('alert-close')
     fireEvent.click(closeIcon)
-    // hide alert
-    expect(wrapper.queryByTestId('alert')).toHaveClass('b-alert--hide')
     // call callback
     expect(testProps.onClose).toHaveBeenCalled()
+    
+    await wait(() => {
+      // hide alert
+      expect(wrapper.queryByTestId('alert')).not.toBeInTheDocument()  
+    })
   })
 
   it('should render correct title when set prop title', () => {
@@ -56,13 +59,14 @@ describe('test Alert component', () => {
     expect(element).toBeInTheDocument()
     expect(element).toHaveClass('b-alert-content')
   })
+
   it('should not render close icon when set prop closable false', () => {
     const testProps: AlertProps = {
       closable: false
     }
     const wrapper = render(<Alert {...testProps} />)
 
-    const closeIcon = wrapper.queryByText('x')
+    const closeIcon = wrapper.queryByTestId('alert-close')
     expect(closeIcon).not.toBeInTheDocument()
   })
 })

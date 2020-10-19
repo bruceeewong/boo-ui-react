@@ -1,17 +1,12 @@
 .b-alert {
   position: relative;
-  display: block;
 
   padding: $alert-padding-y $alert-padding-x;
   border-radius: $border-radius;
 
   background-color: $alert-bg-default;
   color: $alert-color;
-
-  &--hide {
-    display: none;
-  }
-
+  
   // alert type
   &-success {
     background-color: $alert-bg-success;

@@ -140,7 +140,7 @@ describe('test Menu with subMenu', () => {
   })
 
   it('should show & hide dropdown items when mouse enters & leaves', async () => {
-    expect(wrapper.queryByText('drop 1')).not.toBeVisible()
+    expect(wrapper.queryByText('drop 1')).not.toBeInTheDocument()
     const dropdownElement = wrapper.getByText('dropdown')
     fireEvent.mouseEnter(dropdownElement)
     await wait(() => {
@@ -155,9 +155,11 @@ describe('test Menu with subMenu', () => {
 
   it('should trigger onSelect with default index when click on subMenu item', async () => {
     const dropdownElement = wrapper.getByText('dropdown')
-    const dropdownItem = wrapper.getByText('drop 1')
     fireEvent.mouseEnter(dropdownElement)
-    fireEvent.click(dropdownItem)
-    expect(testProps.onSelect).toHaveBeenCalledWith('2-0')
+    await wait(() => {
+      const dropdownItem = wrapper.getByText('drop 1')
+      fireEvent.click(dropdownItem)
+      expect(testProps.onSelect).toHaveBeenCalledWith('2-0')
+    })
   })
 })

@@ -1,6 +1,11 @@
 import React from 'react'
 import classNames from 'classnames'
 import { FontAwesomeIcon, FontAwesomeIconProps } from '@fortawesome/react-fontawesome'
+import { library } from '@fortawesome/fontawesome-svg-core'
+import { fas } from '@fortawesome/free-solid-svg-icons'
+
+// import all icons
+library.add(fas)
 
 type ThemeProps = 'primary' | 'secondary' | 'success' | 'info' | 'warning' | 'danger'
 

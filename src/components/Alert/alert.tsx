@@ -1,5 +1,7 @@
 import React, { useState } from 'react'
 import classNames from 'classnames'
+import Icon from '../Icon/icon'
+import Transition from '../Transition/transition'
 
 export enum AlertType {
   DEFAULT = 'default',
@@ -34,8 +36,7 @@ const Alert: React.FC<AlertProps> = (props) => {
 
   const classes = classNames(
     'b-alert',
-    { [`b-alert-${alertType}`]: alertType }, 
-    { 'b-alert--hide': !visible },
+    { [`b-alert-${alertType}`]: alertType },
     className,
   )
 
@@ -47,20 +48,29 @@ const Alert: React.FC<AlertProps> = (props) => {
   }
 
   return (
-    <div data-testid="alert" className={classes}>
-      <div className="b-alert-main">
-        <h1 className="b-alert-title">{title}</h1>
-        { closable && 
-          <i
-            className="b-alert-icon-close"
-            onClick={handleClose}
-          >x</i>}
+    <Transition
+      in={visible}
+      timeout={200}
+      animation="zoom-in-top"
+      wrapper
+    >
+      <div data-testid="alert" className={classes}>
+        <div className="b-alert-main">
+          <h1 className="b-alert-title">{title}</h1>
+          { closable &&
+            <Icon 
+              className="b-alert-icon-close"
+              icon="times"
+              data-testid="alert-close"
+              onClick={handleClose}
+            />}
+        </div>
+        {
+          content &&
+          <p className="b-alert-content">{content}</p>
+        }
       </div>
-      {
-        content &&
-        <p className="b-alert-content">{content}</p>
-      }
-    </div>
+    </Transition>
   )
 }
 
