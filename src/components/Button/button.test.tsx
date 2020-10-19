@@ -1,4 +1,5 @@
 import React from 'react'
+// @ts-ignore
 import { render, fireEvent } from '@testing-library/react'
 import Button, { ButtonProps, ButtonType, ButtonSize } from './button'
 
@@ -8,7 +9,7 @@ describe('test Button component', () => {
       onClick: jest.fn(),
     }
     const wrapper = render(<Button {...defaultProps}>Test</Button>)
-    const element = wrapper.getByText('Test')
+    const element = wrapper.getByText('Test') as HTMLButtonElement
 
     expect(element).toBeInTheDocument()
 

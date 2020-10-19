@@ -1,4 +1,5 @@
 import React from 'react'
+// @ts-ignore
 import { render, RenderResult, cleanup, fireEvent, wait } from '@testing-library/react'
 import Menu, { MenuProps } from './menu'
 import MenuItem from './menuItem'

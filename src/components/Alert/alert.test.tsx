@@ -1,6 +1,6 @@
 import React from 'react'
-import { render, cleanup } from '@testing-library/react';
-import userEvent from '@testing-library/user-event';
+// @ts-ignore
+import { render, cleanup, fireEvent } from '@testing-library/react';
 import Alert, { AlertProps, AlertTypeProp } from './alert'
 
 describe('test Alert component', () => {
@@ -20,7 +20,7 @@ describe('test Alert component', () => {
 
     const wrapper = render(<Alert {...testProps} />)    
     const closeIcon = wrapper.getByText('x')
-    userEvent.click(closeIcon)
+    fireEvent.click(closeIcon)
     // hide alert
     expect(wrapper.queryByTestId('alert')).toHaveClass('b-alert--hide')
     // call callback
