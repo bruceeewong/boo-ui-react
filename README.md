@@ -427,11 +427,18 @@ yarn add @fortawesome/fontawesome-svg-core \
          @fortawesome/react-fontawesome
 ```
 
-### 实现
+#### 实现
 
 包裹 fontawesome 组件, 扩展 `theme` 赋予颜色的功能
 
 通过 `theme` 添加 css 类名, 通过 sass 生成对应的 类名与 color 属性值, 即可实现. 
+
+### Transition 动效组件
+
+基于 react-transition-group 的 `CSSTransition` 实现, 扩展了两个字段
+
+- animation: 封装动画class
+- wrapper: 给传入组件添加 div 包裹, 避免 css transition 属性与原节点冲突
 
 ## 组件测试
 
@@ -561,3 +568,6 @@ display: block; opacity: 1;
 `CSSTransitionGroup`原理
 
 ![CSSTransitionGroup原理](docs/img/ReactTransitionGroup.png)
+
+## 疑惑
+
