@@ -3,7 +3,7 @@ import Menu from '../components/Menu/menu'
 import MenuItem from '../components/Menu/menuItem'
 import SubMenu from '../components/Menu/subMenu'
 
-function PreviewButton() {
+function PreviewMenu() {
   return (
     <div>
       <h3>Menu</h3>
@@ -61,4 +61,4 @@ function PreviewButton() {
   );
 }
 
-export default PreviewButton;
+export default PreviewMenu;

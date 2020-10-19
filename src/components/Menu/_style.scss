@@ -76,29 +76,44 @@
 }
 
 // sub-menu
-.b-menu-item-submenu {
+.b-submenu-item {
   position: relative;
+
+  &:hover .b-submenu-arrow-icon {
+    transform: rotate(180deg);
+  }
 }
 
+// disable rotate effect under vertical mode
+.b-menu--vertical {
+  &:hover .b-submenu-arrow-icon {
+    transform: none;
+  }
+
+  // only enable rotate when click
+  .b-submenu-item--opened {
+    .b-submenu-arrow-icon {
+      transform: rotate(180deg);
+    }
+  }
+}
 .b-submenu-title {
   display: flex;
   align-items: center;
 }
 
 .b-submenu {
-  display: none;
-
   padding-left: 0;
   
-  transition: $menu-transition;
   white-space: nowrap;
   list-style: none;
 
   .b-menu-item {
     @include menu-item();
   }
+}
 
-  &--opened {
-    display: block;
-  }
+.b-submenu-arrow-icon {
+  margin-left: 4px;
+  transition: transform $transition-time-base $transition-effect-base;
 }

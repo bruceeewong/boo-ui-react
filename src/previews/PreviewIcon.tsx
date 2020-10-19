@@ -1,7 +1,7 @@
 import React from 'react';
 import Icon from '../components/Icon/icon'
 
-function PreviewButton() {
+function PreviewIcon() {
   return (
     <div>
       <h1>Icon</h1>
@@ -22,4 +22,4 @@ function PreviewButton() {
   );
 }
 
-export default PreviewButton;
+export default PreviewIcon;

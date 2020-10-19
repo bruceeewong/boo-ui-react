@@ -350,6 +350,59 @@ const renderChildren = () => {
 
 垂直模式下点击弹出子菜单
 
+##### 下拉菜单动画
+
+使用 react-transition-group 库的 `CSSTransition` 组件实现
+
+```tsx
+ <CSSTransition
+     in={menuOpen}
+     timeout={300}
+     classNames="zoom-in-top"
+     appear
+ >
+     <ul className={subMenuClasses}>
+     	{childrenComponent}
+     </ul>
+ </CSSTransition>
+```
+
+使用 animate.css 的 zoom-in 效果
+
+```scss
+.zoom-in-top {
+  &-enter {
+    opacity: 0;
+    transform: scaleY(0);
+  }
+
+
+  &-enter-active {
+    opacity: 1;
+    transform: scaleY(1);
+    transition: transform 300ms cubic-bezier(0.23, 1, 0.32, 1) 100ms, opacity 300ms cubic-bezier(0.23, 1, 0.32, 1) 100ms;
+    transform-origin: center top;
+  }
+
+  &-exit {
+    opacity: 1;
+  }
+
+  &-exit-active {
+    opacity: 0;
+    transform: scaleY(0);
+    transition: transform 300ms cubic-bezier(0.23, 1, 0.32, 1) 100ms, opacity 300ms cubic-bezier(0.23, 1, 0.32, 1) 100ms;
+    transform-origin: center top;
+  }
+}
+```
+
+坑点:
+
+1 - display 与 opacity 同时设置,使得 opacity 的动画效果失效: 解决办法见 [opacity 与 display 同时设置, 动画不生效?](#opacity-ani-problem)
+
+2 - 下拉菜单消失时, 无动画效果. 原因: display: none 先生效, 同问题1; 解决办法: 使用 `CSSTransition` 的 `unmountOnExit` 特性, 并移除原来的 css display 控制
+
 ### 图标ICON组件
 
 #### 历史
@@ -469,3 +522,42 @@ $theme-colors: (
 }
 ```
 
+### CSS动画
+
+### 动画库
+
+`Animate.css`: https://animate.style/
+
+#### 旋转图标
+
+css3 属性 [`transform`](https://developer.mozilla.org/en-US/docs/Web/CSS/transform) rotate
+
+```css
+transform: rotate(angleValue)
+```
+
+#### <span id="opacity-ani-problem">opacity 与 display 同时设置, 动画不生效?</span>
+
+原因: display 不是一个 animation 支持的属性, 当 display: none -> display: block 变化时, 所有 动画效果都会失效.
+
+解决方案: 通过 js 让 display 先生效, 再让 opacity 变化
+
+思路:
+
+```
+// enter
+display: none; opacity: 0;
+-> display: block; opactiy: 0;
+-> display: block; opacity: 1;
+
+// leave
+display: block; opacity: 1;
+-> display: block; opactiy: 0;
+-> display: none; opacity: 0;
+```
+
+实现: 使用 `React Transition Group`
+
+`CSSTransitionGroup`原理
+
+![CSSTransitionGroup原理](docs/img/ReactTransitionGroup.png)

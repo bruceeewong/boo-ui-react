@@ -1,7 +1,7 @@
 import React from 'react';
 import Alert from '../components/Alert/alert'
 
-function PreviewButton() {
+function PreviewAlert() {
   return (
     <div>
       <h1>Alert</h1>
@@ -25,4 +25,4 @@ function PreviewButton() {
   );
 }
 
-export default PreviewButton;
+export default PreviewAlert;
