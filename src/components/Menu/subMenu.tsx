@@ -1,4 +1,4 @@
-import React, { useContext } from 'react'
+import React, { useState,useContext } from 'react'
 import classNames from 'classnames'
 import { MenuContext } from './menu';
 import { MenuItemProps } from './menuItem';
@@ -17,6 +17,7 @@ const SubMenu: React.FC<SubMenuProp> = (props) => {
     children,
   } = props
 
+  const [menuOpen, setMenuOpen] = useState(false)
   const context = useContext(MenuContext)
 
   const classes = classNames(
@@ -28,7 +29,27 @@ const SubMenu: React.FC<SubMenuProp> = (props) => {
     className,
   )
 
+  const handleOpen = (e: React.MouseEvent) => {
+    e.preventDefault()
+    setMenuOpen(!menuOpen)
+  }
+
+  let timer: any = null
+  const handleMouseEvent = (e: React.MouseEvent, toggle: boolean) => {
+    e.preventDefault()
+
+    clearTimeout(timer)
+    timer = setTimeout(() => {
+      setMenuOpen(toggle)
+    }, 100)
+  }
+
   const renderChildren = () => {
+    const subMenuClasses = classNames(
+      'b-submenu',
+      { 'b-submenu--opened': menuOpen },
+    )
+
     const childrenComponent = React.Children.map(children, (child, index) => {
       const childElement = child as React.FunctionComponentElement<MenuItemProps>
       if (childElement.type.displayName === 'MenuItem') {
@@ -39,14 +60,19 @@ const SubMenu: React.FC<SubMenuProp> = (props) => {
     })
 
     return (
-      <ul className="b-submenu">
+      <ul className={subMenuClasses}>
         {childrenComponent}
       </ul>
     )
   }
 
   return (
-    <li key={index} className={classes}>
+    <li
+      className={classes}
+      onClick={e => handleOpen(e)}
+      onMouseEnter={e => { context.mode === 'horizontal' && handleMouseEvent(e, true)}}
+      onMouseLeave={e => { context.mode === 'horizontal' && handleMouseEvent(e, false)}}
+    >
       <div className="b-submenu-title">
         {title}
       </div>

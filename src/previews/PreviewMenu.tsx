@@ -16,10 +16,13 @@ function PreviewButton() {
         </MenuItem>
         <SubMenu index={2} title="dropdown">
           <MenuItem index={3}>
-            Item 1
+            Item 2-1
           </MenuItem>
-          <MenuItem index={4} disabled={true}>
-            Item 2
+          <MenuItem index={4}>
+            Item 2-2
+          </MenuItem>
+          <MenuItem index={5} disabled={true}>
+            Item 2-3
           </MenuItem>
         </SubMenu>
       </Menu>
@@ -35,10 +38,13 @@ function PreviewButton() {
         </MenuItem>
         <SubMenu index={2} title="dropdown">
           <MenuItem index={3}>
-            Item 1
+            Item 2-1
           </MenuItem>
-          <MenuItem index={4} disabled={true}>
-            Item 2
+          <MenuItem index={4}>
+            Item 2-2
+          </MenuItem>
+          <MenuItem index={5} disabled={true}>
+            Item 2-3
           </MenuItem>
         </SubMenu>
       </Menu>
