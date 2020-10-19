@@ -268,6 +268,44 @@ type ButtonProps = Partial<NativeButtonProps & AnchorButtonProps>
 />
 ```
 
+## Menu 组件
+
+#### 功能 
+
+- 横向
+- 纵向
+- 下拉菜单
+- disabled
+
+#### 设计
+
+```tsx
+<Menu defaultIndex={0} onSelect={} mode="vertical">
+	<Menu.Item>
+		title one
+	</Menu.Item>
+	<Menu.Item disabled>
+		diabled link
+	</Menu.Item>
+	<Menu.Item>
+		<a href="https://qq.com">QQ</a>
+	</Menu.Item>
+</Menu>
+
+interface MenuProps {
+    activeIndex: number;
+    mode: string;
+    onSelect: (selectInedx: number) => void;
+    className: string;
+}
+
+interface MenuItemProps {
+    index: number;
+    disabled: boolean;
+    className: string;
+}
+```
+
 ## 组件测试
 
 ### 测试库选型

@@ -16,7 +16,7 @@ describe('test Button component', () => {
     expect(element.tagName).toEqual('BUTTON')
     expect(element.disabled).toBeFalsy()
 
-    expect(element).toHaveClass('btn btn-default')
+    expect(element).toHaveClass('b-btn b-btn-default')
 
     userEvent.click(element)
     expect(defaultProps.onClick).toHaveBeenCalled()
@@ -31,7 +31,7 @@ describe('test Button component', () => {
     const wrapper = render(<Button {...testProps}>Test</Button>)
     const element = wrapper.getByText('Test')
     expect(element).toBeInTheDocument()
-    expect(element).toHaveClass('btn-primary btn--large test-class')
+    expect(element).toHaveClass('b-btn-primary b-btn--large test-class')
   })
 
   it('should render a link when btnType equals to link and href is provided', () => {
@@ -43,7 +43,7 @@ describe('test Button component', () => {
     const element = wrapper.getByText('Test')
     expect(element).toBeInTheDocument()
     expect(element.tagName).toEqual('A')
-    expect(element).toHaveClass('btn btn-link')
+    expect(element).toHaveClass('b-btn b-btn-link')
   })
 
   it('should render disabled button when prop disabled set to true', () => {
@@ -58,5 +58,16 @@ describe('test Button component', () => {
 
     userEvent.click(element)
     expect(testProps.onClick).not.toHaveBeenCalled()
+  })
+
+  it('should render a disabled link when prop type is link and prop disabled is true', () => {
+    const testProps: ButtonProps = {
+      btnType: 'link',
+      disabled: true,
+    }
+    const wrapper = render(<Button {...testProps}>Test</Button>)
+    const element = wrapper.getByText('Test')
+    expect(element).toBeInTheDocument()
+    expect(element).toHaveClass('b-btn--disabled')
   })
 })

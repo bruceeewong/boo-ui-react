@@ -40,11 +40,11 @@ const Button: React.FC<ButtonProps> = (props) => {
   } = props
   // default classes: "btn btn-large btn-primary"
   const classes = classNames(
-    'btn', 
+    'b-btn', 
     {
-      [`btn-${btnType}`]: btnType,
-      [`btn--${size}`]: size,
-      'disabled': (btnType === ButtonType.Link) && disabled,
+      [`b-btn-${btnType}`]: btnType,
+      [`b-btn--${size}`]: size,
+      'b-btn--disabled': (btnType === ButtonType.Link) && disabled,
     },
     className,  // user custom className
   )

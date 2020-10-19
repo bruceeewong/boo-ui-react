@@ -1,11 +1,12 @@
 import React from 'react';
 // import PreviewButton from './previews/PreviewButton'
-import PreviewAlert from './previews/PreviewAlert'
+// import PreviewAlert from './previews/PreviewAlert'
+import PreviewMenu from './previews/PreviewMenu'
 
 function App() {
   return (
     <div>
-      <PreviewAlert />
+      <PreviewMenu />
     </div>
   );
 }
