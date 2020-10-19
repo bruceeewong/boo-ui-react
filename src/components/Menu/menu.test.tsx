@@ -3,6 +3,7 @@ import { render, RenderResult, cleanup } from '@testing-library/react';
 import userEvent from '@testing-library/user-event';
 import Menu, { MenuProps } from './menu'
 import MenuItem from './menuItem'
+import { wrap } from 'module';
 
 const generateMenu = (props: MenuProps) => {
   return (
@@ -72,5 +73,18 @@ describe('test Menu and MenuItem component', () => {
     wrapper = render(generateMenu(testProps))
     menuElement = wrapper.getByTestId('menu')
     expect(menuElement).toHaveClass('b-menu--vertical')
+  })
+
+  it('should warn when pass children which are not MenuItem type', () => {
+    cleanup()
+    console.error = jest.fn()
+
+    wrapper = render(
+      <Menu {...testProps}>
+        <li>invalid</li>
+      </Menu>
+    )
+    
+    expect(console.error).toHaveBeenCalledTimes(1)
   })
 })

@@ -306,6 +306,14 @@ interface MenuItemProps {
 }
 ```
 
+#### 传递 selectedIndex 等数据
+
+使用 context 与 useContext Hook 进行透传
+
+#### 限制 children 类型
+
+使用 `React.Children.map` 循环 chilren prop, 对属性名进行过滤
+
 ## 组件测试
 
 ### 测试库选型
