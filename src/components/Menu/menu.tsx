@@ -39,7 +39,7 @@ const Menu: React.FC<MenuProps> = (props) => {
 
   const classes = classNames(
     'b-menu',
-    {'b-menu-vertical': mode === MenuMode.VERTICAL},
+    {'b-menu--vertical': mode === MenuMode.VERTICAL},
     className,
   )
 

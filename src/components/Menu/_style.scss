@@ -1,0 +1,52 @@
+.b-menu {
+  display: flex;
+  flex-wrap: wrap;
+
+  padding-left: 0;
+  margin-bottom: 30px;
+  border-bottom: $menu-border-width solid $menu-border-color;
+
+  list-style: none;
+  box-shadow: $menu-box-shadow;
+
+  &--vertical {
+    flex-direction: column;
+    border-bottom-width: 0px;
+    border-right: $menu-border-width solid $menu-border-color;
+
+    .b-menu-item {
+      border-left: $menu-item-active-border-width solid transparent;  // make item switch smoothly 
+
+      &:hover,
+      &--active {    
+        border-bottom-width: 0px;
+        border-left: $menu-item-active-border-width solid $menu-item-active-color;
+      }
+    }
+  }
+}
+
+.b-menu-item {
+  padding: $menu-item-padding-y $menu-item-padding-x;
+  
+  transition: $menu-transition;
+  cursor: pointer;
+
+  &:hover,
+  &:focus {
+    text-decoration: none;
+  }
+
+  &:hover,
+  &--active {
+    color: $menu-item-active-color;
+    border-bottom: $menu-item-active-border-width solid $menu-item-active-color;
+  }
+
+  &--disabled {
+    color: $menu-item-disabled-color;
+    
+    cursor: default;
+    pointer-events: none;
+  }
+}

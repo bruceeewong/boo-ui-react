@@ -37,6 +37,7 @@ $warning:   $yellow     !default;
 $danger:    $red        !default;
 $light:     $gray-100   !default;
 $dark:      $gray-800   !default;
+$disabled:  $gray-600   !default;
 
 
 /* 字体系统 Font system */
@@ -116,7 +117,7 @@ $small-font-size:       $font-size-sm !default;
 $sub-sup-font-size:     0.75em !default;
 $initialism-font-size:  $small-font-size !default;
 
-$text-muted: $gray-600 !default;
+$text-muted: $disabled !default;
 
 // blockquote
 $blockquote-small-color:      $gray-600 !default;
@@ -164,6 +165,9 @@ $box-shadow:              0 0.5rem   1rem      rgba($black, 0.15)     !default;
 $box-shadow-lg:           0 1rem     3rem      rgba($black, 0.175)    !default;
 $box-shadow-inset: inset  0 1px      2px       rgba($black, 0.075)    !default;
 
+// 效果 effects
+$transition-time-base: 0.15s;
+$transition-effect-base: ease-in-out;
 
 /* 按钮 Button */
 /* ========================== */
@@ -190,7 +194,7 @@ $btn-border-width: $border-width !default;
 // 链接按钮
 $btn-link-color: $link-color !default;
 $btn-link-hover-color: $link-hover-color !default;
-$btn-link-disabled-color: $gray-600 !default;
+$btn-link-disabled-color: $disabled !default;
 
 // 按钮 Radius
 $btn-border-radius: $border-radius !default;
@@ -200,10 +204,10 @@ $btn-border-radius-sm: $border-radius-sm !default;
 // 按钮其他
 $btn-box-shadow: inset 0 1px 0 rgba($white, 0.15), 0 1px 1px rgba($black, 0.075) !default;
 $btn-disabled-opacity: 0.65 !default;
-$btn-transition: color 0.15s ease-in-out, 
-                  background-color 0.15s ease-in-out, 
-                  border-color 0.15s ease-in-out, 
-                  box-shadow 0.15s ease-in-out !default;
+$btn-transition: color $transition-time-base $transition-effect-base, 
+                  background-color $transition-time-base $transition-effect-base, 
+                  border-color $transition-time-base $transition-effect-base, 
+                  box-shadow $transition-time-base $transition-effect-base !default;
 
 
 /* 提示 Alert */
@@ -225,9 +229,25 @@ $alert-content-font-size: $font-size-sm !default;
 $alert-content-margin: $spacer * 0.2 0 0 !default;
 
 // alert type
-$alert-bg-default: $primary;
-$alert-bg-success: $success;
-$alert-bg-warning: $warning;
-$alert-bg-danger: $danger;
+$alert-bg-default: $primary !default;
+$alert-bg-success: $success !default;
+$alert-bg-warning: $warning !default;
+$alert-bg-danger: $danger !default;
 
 
+/* 菜单 Menu */
+/* ========================== */
+// menu
+$menu-border-width: $border-width !default;
+$menu-border-color: $border-color !default;
+$menu-box-shadow: inset 0 1px 0 rgba($white, 0.15), 
+                  0 1px 1px rgba($black, 0.075) !default;
+$menu-transition:  color $transition-time-base $transition-effect-base, 
+                    border-color $transition-time-base $transition-effect-base !default;
+
+// menu-item
+$menu-item-padding-y: 0.5rem !default;
+$menu-item-padding-x: 1rem !default;
+$menu-item-active-color: $primary !default;
+$menu-item-active-border-width: 2px !default;
+$menu-item-disabled-color: $disabled !default;
