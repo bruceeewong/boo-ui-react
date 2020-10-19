@@ -1,8 +1,8 @@
 import React from 'react'
-import { render, RenderResult, cleanup } from '@testing-library/react'
-import userEvent from '@testing-library/user-event'
+import { render, RenderResult, cleanup, fireEvent, wait } from '@testing-library/react'
 import Menu, { MenuProps } from './menu'
 import MenuItem from './menuItem'
+import SubMenu from './subMenu'
 
 const generateMenu = (props: MenuProps) => {
   return (
@@ -49,7 +49,7 @@ describe('test Menu and MenuItem component', () => {
 
   it('should change active and call callback with active index when click items', () => {
     const thirdItem = wrapper.getByText('xyz')
-    userEvent.click(thirdItem)
+    fireEvent.click(thirdItem)
     expect(thirdItem).toHaveClass('b-menu-item b-menu-item--active')
     expect(activeElement).not.toHaveClass('b-menu-item--active')
     expect(testProps.onSelect).toHaveBeenCalledWith('2')
@@ -57,7 +57,7 @@ describe('test Menu and MenuItem component', () => {
 
   it('should not change active and call callback when click disabled items', () => {
     wrapper = render(generateMenu(testProps))
-    userEvent.click(disabledElement)
+    fireEvent.click(disabledElement)
     expect(disabledElement).not.toHaveClass('b-menu-item--active')
     expect(testProps.onSelect).not.toHaveBeenCalled()
   })
@@ -85,5 +85,78 @@ describe('test Menu and MenuItem component', () => {
     )
     
     expect(console.error).toHaveBeenCalledTimes(1)
+  })
+})
+
+const generateMenuWithSubMenu = (props: MenuProps) => {
+  return (
+    <Menu {...props}>
+      <MenuItem>
+        active
+      </MenuItem>
+      <MenuItem disabled>
+        disabled
+      </MenuItem>
+      <SubMenu title="dropdown">
+        <MenuItem>drop 1</MenuItem>
+      </SubMenu>
+    </Menu>
+  )
+}
+
+const createStyleTag = (): HTMLStyleElement => {
+  const styleContext = `
+    .b-submenu {
+      display: none;
+    }
+    .b-submenu.b-submenu--opened {
+      display: block;
+    }
+  `
+  const style = document.createElement('style')
+  style.innerHTML = styleContext
+  return style
+}
+
+describe('test Menu with subMenu', () => {
+  beforeEach(() => {
+    testProps = {
+      defaultIndex: '0',
+      className: 'test',
+      onSelect: jest.fn(),
+    }
+    wrapper = render(generateMenuWithSubMenu(testProps))
+    // css files not contain in jest sandbox, append it manually
+    wrapper.container.append(createStyleTag())
+
+    menuElement = wrapper.getByTestId('menu')
+    activeElement = wrapper.getByText('active')
+    disabledElement = wrapper.getByText('disabled')
+  })
+
+  it('should render correct Menu, MenuItem and SubMenu by default', () => {
+    expect(menuElement.querySelectorAll(':scope > li').length).toEqual(3)
+  })
+
+  it('should show & hide dropdown items when mouse enters & leaves', async () => {
+    expect(wrapper.queryByText('drop 1')).not.toBeVisible()
+    const dropdownElement = wrapper.getByText('dropdown')
+    fireEvent.mouseEnter(dropdownElement)
+    await wait(() => {
+      expect(expect(wrapper.queryByText('drop 1')).toBeVisible())
+    })
+
+    fireEvent.mouseLeave(dropdownElement)
+    await wait(() => {
+      expect(expect(wrapper.queryByText('drop 1')).not.toBeVisible())
+    })
+  })
+
+  it('should trigger onSelect with default index when click on subMenu item', async () => {
+    const dropdownElement = wrapper.getByText('dropdown')
+    const dropdownItem = wrapper.getByText('drop 1')
+    fireEvent.mouseEnter(dropdownElement)
+    fireEvent.click(dropdownItem)
+    expect(testProps.onSelect).toHaveBeenCalledWith('2-0')
   })
 })

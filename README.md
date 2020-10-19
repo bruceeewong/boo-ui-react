@@ -360,6 +360,53 @@ Jest: https://jestjs.io/ 通用测试工具
 
 [jest-dom](https://github.com/testing-library/jest-dom#usage): 为 jest matcher 新增了对于 DOM 的断言matcher
 
+### 获取当前节点下的一层节点
+
+使用 `:scope` 选择器 https://developer.mozilla.org/en-US/docs/Web/CSS/:scope
+
+配合 `>` 直接子节点, 获取当前节点下的第一层节点
+
+```
+ul.querySelectorAll(':scope > li')
+```
+
+### 异步断言
+
+`tesing library`提供`waitFor`工具函数,搭配 `await` 使用,将异步断言放进 waitFor 的回调参数中.
+
+```ts
+import { tfireEvent, wait } from '@testing-library/react'
+
+fireEvent.mouseLeave(dropdownElement)
+await wait(() => {
+	expect(expect(wrapper.queryByText('drop 1')).not.toBeVisible())
+})
+```
+
+### 动态添加样式文件
+
+使用 `@testing-library/react` 提供的 matcher `toBeVisible` 可以判断css的 display 样式是否生效
+
+由于 Jest 沙箱不会包含css文件,需要在测试时手动创建
+
+```ts
+const createStyleTag = (): HTMLStyleElement => {
+  const styleContext = `
+    .b-submenu {
+      display: none;
+    }
+    .b-submenu.b-submenu--opened {
+      display: block;
+    }
+  `
+  const style = document.createElement('style')
+  style.innerHTML = styleContext
+  return style
+}
+
+wrapper.container.append(createStyleTag())  // 然后在 wrapper 的 container 上加入
+```
+
 ## 知识点
 
 ### 将 css class 名组合起来
