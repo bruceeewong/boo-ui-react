@@ -22,7 +22,7 @@ const SubMenu: React.FC<SubMenuProp> = (props) => {
 
   const classes = classNames(
     'b-menu-item',
-    'b-submenu-item',
+    'b-menu-item-submenu',
     {
       'b-submenu-item--active': index === context.index,
     },
@@ -69,11 +69,13 @@ const SubMenu: React.FC<SubMenuProp> = (props) => {
   return (
     <li
       className={classes}
-      onClick={e => handleOpen(e)}
       onMouseEnter={e => { context.mode === 'horizontal' && handleMouseEvent(e, true)}}
       onMouseLeave={e => { context.mode === 'horizontal' && handleMouseEvent(e, false)}}
     >
-      <div className="b-submenu-title">
+      <div 
+        className="b-submenu-title" 
+        onClick={e => handleOpen(e)}
+      >
         {title}
       </div>
       {renderChildren()}

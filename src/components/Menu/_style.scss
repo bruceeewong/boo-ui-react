@@ -1,3 +1,20 @@
+// own by menu-item of menu and submenu
+@mixin menu-item() {
+  color: $body-color;
+
+  &:hover,
+  &--active {
+    color: $menu-item-active-color;
+  }
+
+  &--disabled {
+    color: $menu-item-disabled-color;
+    
+    cursor: default;
+    pointer-events: none;
+  }
+}
+
 .b-menu {
   display: flex;
   flex-wrap: wrap;
@@ -9,25 +26,15 @@
   list-style: none;
   box-shadow: $menu-box-shadow;
 
-  &--vertical {
-    flex-direction: column;
-    border-bottom-width: 0px;
-    border-right: $menu-border-width solid $menu-border-color;
-
-    .b-menu-item {
-      border-left: $menu-item-active-border-width solid transparent;  // make item switch smoothly 
+  &--horizontal {
+    // direct menu item under horizontal mode
+    > .b-menu-item {
+      border-bottom: $menu-item-active-border-width solid transparent;
 
       &:hover,
-      &--active {    
-        border-bottom-width: 0px;
-        border-left: $menu-item-active-border-width solid $menu-item-active-color;
+      &--active {
+        border-bottom: $menu-item-active-border-width solid $menu-item-active-color;
       }
-    }
-  }
-
-  &--horizontal {
-    .b-menu-item {
-      border-bottom: $menu-item-active-border-width solid transparent;
     }
 
     .b-submenu {
@@ -37,40 +44,39 @@
       left: 0;
 
       border: $menu-border-width solid $menu-border-width;
-
       background-color: $white;
-
       box-shadow: $submenu-box-shadow;
+    }
+  }
+
+  &--vertical {
+    flex-direction: column;
+    border-bottom-width: 0px;
+    border-right: $menu-border-width solid $menu-border-color;
+
+    // direct menu item under vertical mode
+    > .b-menu-item {
+      border-left: $menu-item-active-border-width solid transparent;  // make item switch smoothly 
+
+      &:hover,
+      &--active {    
+        border-bottom-width: 0px;
+        border-left: $menu-item-active-border-width solid $menu-item-active-color;
+      }
     }
   }
 }
 
 .b-menu-item {
+  @include menu-item();
   padding: $menu-item-padding-y $menu-item-padding-x;
   
   transition: $menu-transition;
   cursor: pointer;
-
-  &:hover,
-  &:focus {
-    text-decoration: none;
-  }
-
-  &:hover,
-  &--active {
-    color: $menu-item-active-color;
-    border-bottom: $menu-item-active-border-width solid $menu-item-active-color;
-  }
-
-  &--disabled {
-    color: $menu-item-disabled-color;
-    
-    cursor: default;
-    pointer-events: none;
-  }
 }
 
-.b-submenu-item {
+// sub-menu
+.b-menu-item-submenu {
   position: relative;
 }
 
@@ -88,19 +94,9 @@
   white-space: nowrap;
   list-style: none;
 
-  // .b-menu-item {
-  //   padding: $menu-item-padding-y $menu-item-padding-x;
-
-  //   color: $body-color;
-  //   transition: $menu-transition;
-
-  //   cursor: pointer;
-
-  //   &:hover,
-  //   &--active {
-  //     color: $menu-item-active-color;
-  //   }
-  // }
+  .b-menu-item {
+    @include menu-item();
+  }
 
   &--opened {
     display: block;
