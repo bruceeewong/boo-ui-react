@@ -3,23 +3,25 @@ import classNames from 'classnames'
 import { MenuItemProps } from './menuItem'
 
 type MenuModeProp = 'horizontal' | 'vertical'
-type SelectCallback = (selectedIndex: number) => void
+type SelectCallback = (selectedIndex: string) => void
 export enum MenuMode {
   HORIZONTAL = 'horizontal',
   VERTICAL = 'vertical',
 }
 
 export interface MenuProps {
-  defaultIndex?: number;
   className?: string;
   mode?: MenuModeProp;
   style?: React.CSSProperties;
+  defaultIndex?: string;
+  defaultOpenSubMenus?: string[];
   onSelect?: SelectCallback;
 }
 
 interface IMenuContext {
-  index?: number;
+  index?: string;
   mode?: MenuModeProp,
+  defaultOpenSubMenus?: string[],
   onSelect?: SelectCallback;
 }
 
@@ -44,7 +46,7 @@ const Menu: React.FC<MenuProps> = (props) => {
     className,
   )
 
-  const handleSelect = (index: number) => {
+  const handleSelect = (index: string) => {
     setActiveIdx(index)
     
     if (onSelect) {
@@ -53,16 +55,23 @@ const Menu: React.FC<MenuProps> = (props) => {
   }
 
   const passedContext: IMenuContext = {
-    index: activeIdx ? activeIdx : 0,
+    index: activeIdx ? activeIdx : '0',
     mode,
+    defaultOpenSubMenus: props.defaultOpenSubMenus,
     onSelect: handleSelect,
   }
 
   const renderChildren = () => {
-    return React.Children.map(children, (child, index) => {
+    return React.Children.map(children, (child, i) => {
       const childElement = child as React.FunctionComponentElement<MenuItemProps>
       const { displayName } = childElement.type
       if (displayName === 'MenuItem' || displayName === 'SubMenu') {
+        // if not set prop index, then set a default
+        if (typeof childElement.props.index === 'undefined') {
+          return React.cloneElement(childElement, {
+            index: i.toString(),
+          })
+        }
         return child
       } else {
         console.error('Warning: Menu has a child which is not MenuItem type')
@@ -81,7 +90,7 @@ const Menu: React.FC<MenuProps> = (props) => {
 }
 
 Menu.defaultProps = {
-  defaultIndex: 0,
+  defaultIndex: '0',
   mode: MenuMode.HORIZONTAL,
 }
 

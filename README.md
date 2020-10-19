@@ -280,27 +280,32 @@ type ButtonProps = Partial<NativeButtonProps & AnchorButtonProps>
 #### 设计
 
 ```tsx
-<Menu defaultIndex={0} onSelect={} mode="vertical">
-	<Menu.Item>
+<Menu defaultIndex="1" onSelect={} mode="vertical">
+	<Menu.Item index="1">
 		title one
 	</Menu.Item>
-	<Menu.Item disabled>
+	<Menu.Item index="2" disabled>
 		diabled link
 	</Menu.Item>
-	<Menu.Item>
-		<a href="https://qq.com">QQ</a>
+	<Menu.SubMenu index="3" title="dropdown">
+        <Menu.Item index="3-1">
+            sub item
+        </Menu.Item>
+        <Menu.Item index="3-2">
+            sub item
+        </Menu.Item>
 	</Menu.Item>
 </Menu>
 
 interface MenuProps {
-    activeIndex: number;
+    activeIndex: string;
     mode: string;
     onSelect: (selectInedx: number) => void;
     className: string;
 }
 
 interface MenuItemProps {
-    index: number;
+    index: string;
     disabled: boolean;
     className: string;
 }
@@ -335,7 +340,15 @@ const renderChildren = () => {
 }
 ```
 
+#### 下拉菜单
 
+添加 submenu 组件,
+
+在 Menu 组件的children中增加该类型的支持
+
+水平模式下悬浮弹出子菜单
+
+垂直模式下点击弹出子菜单
 
 ## 组件测试
 

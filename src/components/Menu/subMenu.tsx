@@ -4,8 +4,8 @@ import { MenuContext } from './menu';
 import { MenuItemProps } from './menuItem';
 
 export interface SubMenuProp {
-  index?: number;
   title: string;
+  index?: string;
   className?: string;
 }
 
@@ -50,9 +50,15 @@ const SubMenu: React.FC<SubMenuProp> = (props) => {
       { 'b-submenu--opened': menuOpen },
     )
 
-    const childrenComponent = React.Children.map(children, (child, index) => {
+    const childrenComponent = React.Children.map(children, (child, i) => {
       const childElement = child as React.FunctionComponentElement<MenuItemProps>
       if (childElement.type.displayName === 'MenuItem') {
+        // if not set prop index, then set a default
+        if (typeof childElement.props.index === 'undefined') {
+          return React.cloneElement(childElement, {
+            index: `${index}-${i}`,
+          })
+        }
         return childElement
       } else {
         console.error('Warning: SubMenu has a child which is not MenuItem type')

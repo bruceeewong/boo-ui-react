@@ -7,21 +7,21 @@ function PreviewButton() {
   return (
     <div>
       <h3>Menu</h3>
-      <Menu defaultIndex={0} onSelect={(index) => { console.log(index) }}>
-        <MenuItem index={0}>
+      <Menu onSelect={(index) => { console.log(index) }}>
+        <MenuItem>
           Item 1
         </MenuItem>
-        <MenuItem index={1} disabled>
+        <MenuItem disabled>
           Item 2
         </MenuItem>
-        <SubMenu index={2} title="dropdown">
-          <MenuItem index={3}>
+        <SubMenu title="dropdown">
+          <MenuItem>
             Item 2-1
           </MenuItem>
-          <MenuItem index={4}>
+          <MenuItem>
             Item 2-2
           </MenuItem>
-          <MenuItem index={5} disabled={true}>
+          <MenuItem disabled={true}>
             Item 2-3
           </MenuItem>
         </SubMenu>
@@ -29,22 +29,25 @@ function PreviewButton() {
       <hr/>
 
       <h3>Vertical Menu</h3>
-      <Menu mode="vertical" defaultIndex={0} onSelect={(index) => { console.log(index) }}>
-        <MenuItem index={0}>
-          Item 1
+      <Menu mode="vertical" defaultIndex="home" onSelect={(index) => { console.log(index) }}>
+        <MenuItem index="home">
+          Home
         </MenuItem>
-        <MenuItem index={1} disabled={true}>
-          Item 2
+        <MenuItem index="blog">
+          Blog
         </MenuItem>
-        <SubMenu index={2} title="dropdown">
-          <MenuItem index={3}>
-            Item 2-1
+        <MenuItem index="coming" disabled>
+          Coming Soon
+        </MenuItem>
+        <SubMenu index="contact" title="Contact">
+          <MenuItem index="contact-wechat">
+            Wechat
           </MenuItem>
-          <MenuItem index={4}>
-            Item 2-2
+          <MenuItem index="contact-qq">
+            QQ
           </MenuItem>
-          <MenuItem index={5} disabled={true}>
-            Item 2-3
+          <MenuItem index="contact-twitter" disabled={true}>
+            Twitter
           </MenuItem>
         </SubMenu>
       </Menu>
