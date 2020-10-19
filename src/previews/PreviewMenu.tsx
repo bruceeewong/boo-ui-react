@@ -29,7 +29,12 @@ function PreviewButton() {
       <hr/>
 
       <h3>Vertical Menu</h3>
-      <Menu mode="vertical" defaultIndex="home" onSelect={(index) => { console.log(index) }}>
+      <Menu 
+        mode="vertical" 
+        defaultIndex="contact-wechat" 
+        defaultOpenSubMenus={['contact']}
+        onSelect={(index) => { console.log(index) }}
+      >
         <MenuItem index="home">
           Home
         </MenuItem>

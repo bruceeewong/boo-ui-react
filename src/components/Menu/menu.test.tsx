@@ -7,13 +7,13 @@ import MenuItem from './menuItem'
 const generateMenu = (props: MenuProps) => {
   return (
     <Menu {...props}>
-      <MenuItem index={0}>
+      <MenuItem index="0">
         active
       </MenuItem>
-      <MenuItem index={1} disabled>
+      <MenuItem index="1" disabled>
         disabled
       </MenuItem>
-      <MenuItem index={2}>
+      <MenuItem index="2">
         xyz
       </MenuItem>
     </Menu>
@@ -29,7 +29,7 @@ let wrapper: RenderResult,
 describe('test Menu and MenuItem component', () => {
   beforeEach(() => {
     testProps = {
-      defaultIndex: 0,
+      defaultIndex: '0',
       className: 'test',
       onSelect: jest.fn(),
     }
@@ -52,7 +52,7 @@ describe('test Menu and MenuItem component', () => {
     userEvent.click(thirdItem)
     expect(thirdItem).toHaveClass('b-menu-item b-menu-item--active')
     expect(activeElement).not.toHaveClass('b-menu-item--active')
-    expect(testProps.onSelect).toHaveBeenCalledWith(2)
+    expect(testProps.onSelect).toHaveBeenCalledWith('2')
   })
 
   it('should not change active and call callback when click disabled items', () => {
@@ -64,7 +64,7 @@ describe('test Menu and MenuItem component', () => {
 
   it('should render virtical mode when prop mode is vertical', () => {
     testProps = {
-      defaultIndex: 0,
+      defaultIndex: '0',
       mode: 'vertical',
     }
 

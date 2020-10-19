@@ -17,8 +17,13 @@ const SubMenu: React.FC<SubMenuProp> = (props) => {
     children,
   } = props
 
-  const [menuOpen, setMenuOpen] = useState(false)
   const context = useContext(MenuContext)
+
+  const isOpened = (index && context.mode === 'vertical' && context.defaultOpenSubMenus) 
+                    ? context.defaultOpenSubMenus.includes(index) 
+                    : false
+
+  const [menuOpen, setMenuOpen] = useState(isOpened)
 
   const classes = classNames(
     'b-menu-item',
@@ -43,7 +48,6 @@ const SubMenu: React.FC<SubMenuProp> = (props) => {
       setMenuOpen(toggle)
     }, 100)
   }
-
   const renderChildren = () => {
     const subMenuClasses = classNames(
       'b-submenu',
