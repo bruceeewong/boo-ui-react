@@ -10,7 +10,7 @@ function PreviewButton() {
         <MenuItem index={0}>
           Item 1
         </MenuItem>
-        <MenuItem index={1} disabled={true}>
+        <MenuItem index={1} disabled>
           Item 2
         </MenuItem>
         <MenuItem index={2}>

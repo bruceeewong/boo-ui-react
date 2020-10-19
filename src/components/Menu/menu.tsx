@@ -46,7 +46,9 @@ const Menu: React.FC<MenuProps> = (props) => {
   const handleSelect = (index: number) => {
     setActiveIdx(index)
     
-    onSelect && onSelect(index)
+    if (onSelect) {
+      onSelect(index)
+    }
   }
 
   const passedContext: IMenuContext = {
@@ -55,7 +57,7 @@ const Menu: React.FC<MenuProps> = (props) => {
   }
 
   return (
-    <ul className={classes} style={style}>
+    <ul className={classes} style={style} data-testid="menu">
       <MenuContext.Provider value={passedContext}>
         {children}
       </MenuContext.Provider>
