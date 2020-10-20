@@ -968,13 +968,41 @@ $theme-colors: (
 }
  ```
 
-#### Travis CI
-
-> https://travis-ci.com/
-
-
-
 ### CD - 持续交付, 持续部署
 
 - 频繁的将软件的新版本, 交付给质量团队或者用户
 - 代码通过评审以后, 自动部署到生产环境
+
+#### Travis CI + Github Pages 完成自动化 CI / CD
+
+> Travis: https://travis-ci.com/
+>
+> Github Page: https://pages.github.com/
+
+Travis 配置, 指定环境, 添加环境变量, 指定触发的npm script，指定部署到 `github-pages`
+
+local_dir 则指定运行构建脚本后要打包的目录
+
+> 需要前往github创建个人token，并填入travis的该仓库的设置中作为环境变量，名称为`github_token`
+
+```
+language: node_js
+node_js:
+  - 'stable'
+cache:
+  directories:
+    - node_modules
+env:
+  - CI=true
+script:
+  - npm run build-storybook
+deploy:
+  provider: pages
+  skip_cleanup: true
+  github_token: $github_token
+  local_dir: storybook-static
+  on:
+    branch: master
+```
+
+### 
