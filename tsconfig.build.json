@@ -1,8 +1,8 @@
 {
   "compilerOptions": {
+    "outDir": "dist",
     "module": "esnext",
     "target": "ES5",
-    "outDir": "build",
     "declaration": true,
     "jsx": "react",
     "moduleResolution": "node",

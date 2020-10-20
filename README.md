@@ -440,6 +440,46 @@ yarn add @fortawesome/fontawesome-svg-core \
 - animation: 封装动画class
 - wrapper: 给传入组件添加 div 包裹, 避免 css transition 属性与原节点冲突
 
+## CSS动画
+
+### 动画库
+
+`Animate.css`: https://animate.style/
+
+#### 旋转图标
+
+css3 属性 [`transform`](https://developer.mozilla.org/en-US/docs/Web/CSS/transform) rotate
+
+```css
+transform: rotate(angleValue)
+```
+
+#### <span id="opacity-ani-problem">opacity 与 display 同时设置, 动画不生效?</span>
+
+原因: display 不是一个 animation 支持的属性, 当 display: none -> display: block 变化时, 所有 动画效果都会失效.
+
+解决方案: 通过 js 让 display 先生效, 再让 opacity 变化
+
+思路:
+
+```
+// enter
+display: none; opacity: 0;
+-> display: block; opactiy: 0;
+-> display: block; opacity: 1;
+
+// leave
+display: block; opacity: 1;
+-> display: block; opactiy: 0;
+-> display: none; opacity: 0;
+```
+
+实现: 使用 `React Transition Group`
+
+`CSSTransitionGroup`原理
+
+![CSSTransitionGroup原理](docs/img/ReactTransitionGroup.png)
+
 ## 组件测试
 
 ### 测试库选型
@@ -752,6 +792,106 @@ link的一方, 如使用组件库的web app:
 
 在组件库的node_modules` link` Web app所使用的 react
 
+## Npm
+
+### 主要功能
+
+- 下载别人编写的第三方包到本地使用
+- 下载并安装别人编写的命令行程序到本地使用
+- 将自己编写的包或者命令行程序上传到npm服务器
+
+### 账户
+
+```
+npm whoami # 查看登录状态
+
+npm config ls # 查看当前 npm 的仓库, 如果设了别的镜像源就登录不上去, 要改回 官方源 https://registry.npmjs.org/
+
+npm adduser # 登录
+```
+
+### 发布
+
+#### package.json 基础参数解析
+
+- name: 包名
+- version: 版本, 版本号命名请遵循: [语义化版本](https://semver.org/lang/zh-CN/)
+
+```
+版本格式：主版本号.次版本号.修订号，版本号递增规则如下：
+
+主版本号：当你做了不兼容的 API 修改，
+次版本号：当你做了向下兼容的功能性新增，
+修订号：当你做了向下兼容的问题修正。
+先行版本号及版本编译元数据可以加到“主版本号.次版本号.修订号”的后面，作为延伸。
+```
+
+- description: 包描述
+- author: 作者
+- license: 开源协议, 一般为 MIT
+- keywords: 搜索关键字
+- homepage: 项目主页
+- repository: 代码仓库
+  - type: 类型, 如 git
+  - url: 仓库链接
+
+#### 上传相关参数
+
+- files: 指定哪些文件会被上传到 npm
+
+```
+"files": [
+	"dist"
+],
+```
+
+- script
+  - prepublish: 发布前的钩子, 可以指定构建命令
+
+```
+"scripts": {
+	"build": "xxx",
+	"prepublish": "npm run build"
+}
+```
+
+#### 依赖相关的参数
+
+- dependencies: 项目最终运行所需要的依赖
+
+- devDependencies: 项目开发时需要的依赖, 不需要被打包进最终结果的
+
+- peerDependencies: 项目赖以生存的包, 告诉用户必须安装这些依赖后, 本包才能正常工作；npm 安装时不会安装, 使用外部的; 如果没有, 会抛出警告
+
+```
+"peerDependencies": {
+    "react": ">=16.8.0",
+    "react-dom": ">=16.8.0"
+},
+```
+
+在开发组件库时, 还需要 react 和 react-dom 依赖, 可以移动至 devDependencies
+
+```
+"devDependencies": {
+    "react": "^16.12.0",
+    "react-dom": "^16.12.0",
+    ...
+}
+```
+
+### 发布命令
+
+```
+npm publish
+```
+
+最终发布的文件有:
+
+- dist/
+- READE.md
+- package.json
+
 ## 知识点
 
 ### 将 css class 名组合起来
@@ -784,45 +924,40 @@ $theme-colors: (
 }
 ```
 
-### CSS动画
+## CI / CD
 
-### 动画库
+### CI - 运行lint
 
-`Animate.css`: https://animate.style/
-
-#### 旋转图标
-
-css3 属性 [`transform`](https://developer.mozilla.org/en-US/docs/Web/CSS/transform) rotate
-
-```css
-transform: rotate(angleValue)
-```
-
-#### <span id="opacity-ani-problem">opacity 与 display 同时设置, 动画不生效?</span>
-
-原因: display 不是一个 animation 支持的属性, 当 display: none -> display: block 变化时, 所有 动画效果都会失效.
-
-解决方案: 通过 js 让 display 先生效, 再让 opacity 变化
-
-思路:
+配置 `ESLint` script
 
 ```
-// enter
-display: none; opacity: 0;
--> display: block; opactiy: 0;
--> display: block; opacity: 1;
-
-// leave
-display: block; opacity: 1;
--> display: block; opactiy: 0;
--> display: none; opacity: 0;
+"lint": "eslint src --ext js,ts,tsx --max-warnings 5",
 ```
 
-实现: 使用 `React Transition Group`
+ ### CI - 运行单元测试
 
-`CSSTransitionGroup`原理
+> create-react-app 的 test 默认处于 watch 模式, 可以通过指定环境变量 CI 来一次性执行, [详情](https://create-react-app.dev/docs/running-tests#continuous-integration)
 
-![CSSTransitionGroup原理](docs/img/ReactTransitionGroup.png)
+设置环境变量又会因操作系统不一样而有不同写法, 这里使用 `cross-env` npm包来完成
 
-## 疑惑
+```
+"test:once": "cross-env CI=true react-scripts test",
+```
 
+### CI - prepublish 添加钩子
+
+```
+"prepublish": "npm run test:once && npm run lint && npm run build"
+```
+
+### CI - Git precommit
+
+使用 `husky`
+
+ ```
+"husky": {
+    "hooks": {
+    	"pre-commit": "npm run test:once && npm run lint"
+    }
+}
+ ```

@@ -1,7 +1,7 @@
 import React from 'react'
 // @ts-ignore
 import { render, fireEvent } from '@testing-library/react'
-import Button, { ButtonProps, ButtonType, ButtonSize } from './button'
+import Button, { ButtonProps } from './button'
 
 describe('test Button component', () => {
   it('should render the correct default button', () => {
@@ -24,8 +24,8 @@ describe('test Button component', () => {
 
   it('should render the correct component based on different props', () => {
     const testProps: ButtonProps = {
-      btnType: ButtonType.Primary,
-      size: ButtonSize.Large,
+      btnType: 'primary',
+      size: 'large',
       className: 'test-class',
     }
     const wrapper = render(<Button {...testProps}>Test</Button>)
@@ -36,7 +36,7 @@ describe('test Button component', () => {
 
   it('should render a link when btnType equals to link and href is provided', () => {
     const testAnchorProps: ButtonProps = {
-      btnType: ButtonType.Link,
+      btnType: 'link',
       href: 'https://qq.com',
     }
     const wrapper = render(<Button {...testAnchorProps}>Test</Button>)
