@@ -926,7 +926,13 @@ $theme-colors: (
 
 ## CI / CD
 
-### CI - 运行lint
+### CI - 持续继承
+
+- 频繁将代码集成到主干(master)
+- 快速发现错误
+- 防止分支大幅偏离主干
+
+#### 运行lint
 
 配置 `ESLint` script
 
@@ -934,7 +940,7 @@ $theme-colors: (
 "lint": "eslint src --ext js,ts,tsx --max-warnings 5",
 ```
 
- ### CI - 运行单元测试
+#### 运行单元测试
 
 > create-react-app 的 test 默认处于 watch 模式, 可以通过指定环境变量 CI 来一次性执行, [详情](https://create-react-app.dev/docs/running-tests#continuous-integration)
 
@@ -944,13 +950,13 @@ $theme-colors: (
 "test:once": "cross-env CI=true react-scripts test",
 ```
 
-### CI - prepublish 添加钩子
+#### prepublish 添加钩子
 
 ```
 "prepublish": "npm run test:once && npm run lint && npm run build"
 ```
 
-### CI - Git precommit
+#### Git precommit
 
 使用 `husky`
 
@@ -961,3 +967,8 @@ $theme-colors: (
     }
 }
  ```
+
+### CD - 持续交付, 持续部署
+
+- 频繁的将软件的新版本, 交付给质量团队或者用户
+- 代码通过评审以后, 自动部署到生产环境

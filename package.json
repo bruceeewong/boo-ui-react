@@ -61,6 +61,7 @@
     "@types/react-dom": "16.9.4",
     "@types/react-transition-group": "^4.2.3",
     "@types/storybook__addon-info": "^5.2.3",
+    "babel-loader": "8.0.6",
     "cross-env": "^7.0.2",
     "husky": "^4.3.0",
     "node-sass": "^4.13.0",
