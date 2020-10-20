@@ -1,0 +1,24 @@
+{
+  "files": {
+    "main.css": "/bruceeewong/boo-ui-react/main.css",
+    "main.js": "/bruceeewong/boo-ui-react/main.d7170ad5c984ad61d957.bundle.js",
+    "main.css.map": "/bruceeewong/boo-ui-react/main.css.map",
+    "main.js.map": "/bruceeewong/boo-ui-react/main.d7170ad5c984ad61d957.bundle.js.map",
+    "runtime~main.js": "/bruceeewong/boo-ui-react/runtime~main.d7170ad5c984ad61d957.bundle.js",
+    "runtime~main.js.map": "/bruceeewong/boo-ui-react/runtime~main.d7170ad5c984ad61d957.bundle.js.map",
+    "vendors~main.css": "/bruceeewong/boo-ui-react/vendors~main.css",
+    "vendors~main.js": "/bruceeewong/boo-ui-react/vendors~main.d7170ad5c984ad61d957.bundle.js",
+    "vendors~main.css.map": "/bruceeewong/boo-ui-react/vendors~main.css.map",
+    "vendors~main.js.map": "/bruceeewong/boo-ui-react/vendors~main.d7170ad5c984ad61d957.bundle.js.map",
+    "iframe.html": "/bruceeewong/boo-ui-react/iframe.html",
+    "precache-manifest.e1a861691d088277f6e6dd9a7959e26a.js": "/bruceeewong/boo-ui-react/precache-manifest.e1a861691d088277f6e6dd9a7959e26a.js",
+    "service-worker.js": "/bruceeewong/boo-ui-react/service-worker.js"
+  },
+  "entrypoints": [
+    "runtime~main.d7170ad5c984ad61d957.bundle.js",
+    "vendors~main.css",
+    "vendors~main.d7170ad5c984ad61d957.bundle.js",
+    "main.css",
+    "main.d7170ad5c984ad61d957.bundle.js"
+  ]
+}
