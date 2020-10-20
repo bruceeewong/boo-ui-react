@@ -950,10 +950,10 @@ $theme-colors: (
 "test:once": "cross-env CI=true react-scripts test",
 ```
 
-#### prepublish 添加钩子
+#### prepublishOnly 添加钩子
 
 ```
-"prepublish": "npm run test:once && npm run lint && npm run build"
+"prepublishOnly": "npm run test:once && npm run lint && npm run build"
 ```
 
 #### Git precommit
@@ -967,6 +967,12 @@ $theme-colors: (
     }
 }
  ```
+
+#### Travis CI
+
+> https://travis-ci.com/
+
+
 
 ### CD - 持续交付, 持续部署
 
