@@ -497,7 +497,7 @@ const createStyleTag = (): HTMLStyleElement => {
 wrapper.container.append(createStyleTag())  // 然后在 wrapper 的 container 上加入
 ```
 
-## 展示组件
+## Storybook
 
 > CRA create-react-app 不适合组件库开发时的展示
 
@@ -507,14 +507,45 @@ wrapper.container.append(createStyleTag())  // 然后在 wrapper 的 container �
 - 能追踪组件的行为并且具有属性调试功能
 - 可以为组件自动生成文档和属性列表
 
-选型: StoreBook 
+选型: `StoreBook@5.2.8`
 
 ### Storybook 添加全局样式
 
 ```
-// .storybook/preview.js
+// .storybook/config.js
 
 import '../src/styles/index.scss';
+```
+
+#### Storybook TSX 支持
+
+在.storybook 目录下新建 Webpack 的配置文件
+
+```js
+// .storybook/webpack.config.js
+module.exports = ({config}) => {
+  config.module.rules.push({
+    test: /\.tsx?$/,
+    use: [
+      {
+        loader: require.resolve("babel-loader"),
+        options: {
+          presets: [require.resolve("babel-preset-react-app")]
+        }
+      }
+    ]
+  });
+
+  config.resolve.extensions.push(".ts", ".tsx");
+
+  return config;
+}
+```
+
+然后修改 `.storybook/config.js` 文件的configure
+
+```js
+configure(require.context('../src', true, /\.stories\.tsx$/), module);  // 改目录为 src, 匹配为 tsx
 ```
 
 ### StoreBook 添加组件 story
@@ -573,6 +604,24 @@ export const decorators = [
 ```
 
 #### Native Addons
+
+在单个story中导入,使用 `addDecorator` API, 可以位单个story导入 decorator, 这里为 button story 导入自动生成文档的插件
+
+```ts
+import { storiesOf } from '@storybook/react'
+import { withInfo } from '@storybook/addon-info'
+
+storiesOf('Button Component', module)
+  .addDecorator(withInfo)
+```
+
+#### 自动生成组件描述
+
+使用 [`@storybook/addon-info`](https://github.com/storybookjs/storybook/tree/v5.2.8/addons/info)作为装饰器, 自动为组件生成源码+描述等
+
+#### 自动生成组件属性
+
+使用[ `react-docgen-typescript-loader`](https://github.com/styleguidist/react-docgen-typescript) 通过配置 Webpack的 loader 自动读取组件的属性定义, 类型, 默认值等, 并生成表格
 
 ## 知识点
 
