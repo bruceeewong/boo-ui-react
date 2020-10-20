@@ -1,7 +1,6 @@
 import React from 'react'
 import { storiesOf } from '@storybook/react'
 import { action } from '@storybook/addon-actions'
-import { withInfo } from '@storybook/addon-info'
 
 import Button from './button'
 
@@ -26,13 +25,12 @@ const btnWithType = () => (
 )
 
 storiesOf('Button Component', module)
-  .addDecorator(withInfo)
   .addParameters({
     info: {
-      text: 'this is a nice component',
+      text: 'A lovely button component, support default, primary, danger and link type',
       inline: true,
     }
   })
-  .add('默认 Button', defaultBtn)
+  .add('Button', defaultBtn)
   .add('Button 尺寸', btnWithSize)
   .add('Button 类型', btnWithType)

@@ -1620,7 +1620,7 @@
     qs "^6.6.0"
     ts-dedent "^1.1.0"
 
-"@storybook/addons@5.3.21", "@storybook/addons@^5.2.8":
+"@storybook/addons@5.3.21", "@storybook/addons@^5.2.0", "@storybook/addons@^5.2.8":
   version "5.3.21"
   resolved "https://registry.npm.taobao.org/@storybook/addons/download/@storybook/addons-5.3.21.tgz?cache=0&sync_timestamp=1603105637560&other_urls=https%3A%2F%2Fregistry.npm.taobao.org%2F%40storybook%2Faddons%2Fdownload%2F%40storybook%2Faddons-5.3.21.tgz#ee312c738c33e8c34dc11777ef93522c3c36e56a"
   integrity sha1-7jEsc4wz6MNNwRd375NSLDw25Wo=
@@ -1839,7 +1839,7 @@
     pretty-hrtime "^1.0.3"
     regenerator-runtime "^0.13.3"
 
-"@storybook/react@^5.2.8":
+"@storybook/react@^5.2.0", "@storybook/react@^5.2.8":
   version "5.3.21"
   resolved "https://registry.npm.taobao.org/@storybook/react/download/@storybook/react-5.3.21.tgz?cache=0&sync_timestamp=1603105636109&other_urls=https%3A%2F%2Fregistry.npm.taobao.org%2F%40storybook%2Freact%2Fdownload%2F%40storybook%2Freact-5.3.21.tgz#f7f364d3d3adc70746a12cf8b6614952f41d4bd0"
   integrity sha1-9/Nk09OtxwdGoSz4tmFJUvQdS9A=
@@ -2304,6 +2304,15 @@
   version "1.0.1"
   resolved "https://registry.npm.taobao.org/@types/stack-utils/download/@types/stack-utils-1.0.1.tgz?cache=0&sync_timestamp=1600735462577&other_urls=https%3A%2F%2Fregistry.npm.taobao.org%2F%40types%2Fstack-utils%2Fdownload%2F%40types%2Fstack-utils-1.0.1.tgz#0a851d3bd96498fa25c33ab7278ed3bd65f06c3e"
   integrity sha1-CoUdO9lkmPolwzq3J47TvWXwbD4=
+
+"@types/storybook__addon-info@^5.2.3":
+  version "5.2.3"
+  resolved "https://registry.npm.taobao.org/@types/storybook__addon-info/download/@types/storybook__addon-info-5.2.3.tgz#671f4616ae5b30602163d7385c3a0eaa627dfea8"
+  integrity sha1-Zx9GFq5bMGAhY9c4XDoOqmJ9/qg=
+  dependencies:
+    "@storybook/addons" "^5.2.0"
+    "@storybook/react" "^5.2.0"
+    "@types/react" "*"
 
 "@types/tapable@*", "@types/tapable@^1.0.5":
   version "1.0.6"

@@ -623,6 +623,36 @@ storiesOf('Button Component', module)
 
 使用[ `react-docgen-typescript-loader`](https://github.com/styleguidist/react-docgen-typescript) 通过配置 Webpack的 loader 自动读取组件的属性定义, 类型, 默认值等, 并生成表格
 
+#### 自动生成注释
+
+使用 [`jsdoc`](https://jsdoc.app/about-getting-started.html) 标准写注释
+
+## JavaScript 模块化
+
+### 模块化历史
+
+- Namespace 全局挂载
+- CommonJS (NodeJS,不支持浏览器)
+- AMD(支持浏览器)
+
+- ES Module(大一统)
+
+### Webpack
+
+### UMD模式
+
+通过代码兼容 commonjs, amd, es module.
+
+不建议umd, 无法做到按需加载
+
+### es6 module
+
+使用 Es module 可以静态分析, 做到 tree shaking
+
+### Typescript 转为 ES Module 
+
+
+
 ## 知识点
 
 ### 将 css class 名组合起来

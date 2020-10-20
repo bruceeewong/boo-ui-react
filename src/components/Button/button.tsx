@@ -6,16 +6,30 @@ export type ButtonType = 'primary' | 'default' | 'danger' | 'link'
 interface BaseButtonProps {
   children: ReactNode;
 
+  /** 自定义样式名 */
   className?: string;
+
+  /** 设置 Button 的禁用 */
   disabled?: boolean;
+  /** 设置 Button 的尺寸 */
   size?: ButtonSize;
+  /** 设置 Button 的类型 */
   btnType?: ButtonType;
+
+  /** 当 type 为 link 时生效, 设置 a 标签的 href */
   href?: string;
 }
 type NativeButtonProps = BaseButtonProps & ButtonHTMLAttributes<HTMLElement>
 type AnchorButtonProps = BaseButtonProps & AnchorHTMLAttributes<HTMLElement>
 export type ButtonProps = Partial<NativeButtonProps & AnchorButtonProps>
 
+/**
+ * ## Usage
+ * ~~~js
+ * import { Button } from '@boo/ui-react`
+ * ~~~
+ * @param props 
+ */
 export const Button: FC<ButtonProps> = (props) => {
   const {
     btnType,
