@@ -3,19 +3,12 @@ import classNames from 'classnames'
 import Icon from '../Icon/icon'
 import Transition from '../Transition/transition'
 
-export enum AlertType {
-  DEFAULT = 'default',
-  SUCCESS = 'success',
-  DANGER = 'danger',
-  WARNING = 'warning',
-}
-
-export type AlertTypeProp = 'default' | 'success' | 'danger' | 'warning'
+export type AlertType = 'default' | 'success' | 'danger' | 'warning'
 
 export interface BaseAlertProps {
   title?: string;
   content?: string;
-  alertType?: AlertTypeProp;
+  alertType?: AlertType;
   closable?: boolean;
   onClose?: () => any;
 }
@@ -77,7 +70,7 @@ const Alert: React.FC<AlertProps> = (props) => {
 Alert.defaultProps = {
   title: 'default title',
   closable: true,
-  alertType: AlertType.DEFAULT,
+  alertType: 'default',
 }
 
 export default Alert

@@ -1,34 +1,22 @@
-import React from 'react'
+import React, { FC, ReactNode, ButtonHTMLAttributes, AnchorHTMLAttributes } from 'react'
 import classNames from 'classnames'
 
-export enum ButtonSize {
-  Large = 'large',
-  smallall = 'small',
-}
-
-export enum ButtonType {
-  Primary = 'primary',
-  Default = 'default',
-  Danger = 'danger',
-  Link = 'link',
-}
-
-export type ButtonSizeProp = 'large' | 'small'
-export type ButtonTypeProp = 'primary' | 'default' | 'danger' | 'link'
+export type ButtonSize = 'large' | 'small'
+export type ButtonType = 'primary' | 'default' | 'danger' | 'link'
 interface BaseButtonProps {
-  children: React.ReactNode;
+  children: ReactNode;
 
   className?: string;
   disabled?: boolean;
-  size?: ButtonSizeProp;
-  btnType?: ButtonTypeProp;
+  size?: ButtonSize;
+  btnType?: ButtonType;
   href?: string;
 }
-type NativeButtonProps = BaseButtonProps & React.ButtonHTMLAttributes<HTMLElement>
-type AnchorButtonProps = BaseButtonProps & React.AnchorHTMLAttributes<HTMLElement>
+type NativeButtonProps = BaseButtonProps & ButtonHTMLAttributes<HTMLElement>
+type AnchorButtonProps = BaseButtonProps & AnchorHTMLAttributes<HTMLElement>
 export type ButtonProps = Partial<NativeButtonProps & AnchorButtonProps>
 
-const Button: React.FC<ButtonProps> = (props) => {
+export const Button: FC<ButtonProps> = (props) => {
   const {
     btnType,
     disabled,
@@ -44,12 +32,12 @@ const Button: React.FC<ButtonProps> = (props) => {
     {
       [`b-btn-${btnType}`]: btnType,
       [`b-btn--${size}`]: size,
-      'b-btn--disabled': (btnType === ButtonType.Link) && disabled,
+      'b-btn--disabled': (btnType === 'link') && disabled,
     },
     className,  // user custom className
   )
 
-  if (btnType === ButtonType.Link && href) {
+  if (btnType === 'link' && href) {
     return (
       <a 
         className={classes}
@@ -73,7 +61,7 @@ const Button: React.FC<ButtonProps> = (props) => {
 
 Button.defaultProps = {
   disabled: false,
-  btnType: ButtonType.Default,
+  btnType: 'default',
 }
 
 export default Button
