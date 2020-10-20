@@ -649,6 +649,8 @@ storiesOf('Button Component', module)
 
 使用 Es module 可以静态分析, 做到 tree shaking
 
+`package.json` 中配置 `module` 入口, `main`是 commonjs 的入口
+
 ### Typescript 转为 ES Module 
 
 
