@@ -651,9 +651,106 @@ storiesOf('Button Component', module)
 
 `package.json` 中配置 `module` 入口, `main`是 commonjs 的入口
 
+所以组件库项目配置 `package.json` 如下:
+
+```
+// package.json 
+
+"main": "build/index.js",
+"module": "build/index.js",
+"types": "build/index.d.ts", 
+```
+
 ### Typescript 转为 ES Module 
 
+通过 src 下的 index.tsx 统一导入组件
 
+package.json 配置 module 字段为 Src/index.tsx
+
+```
+"build-ts": "tsc -p tsconfig.build.json",
+```
+
+### Typescript 配置文件
+
+`tsconfig.build.json`
+
+```
+{
+  // 编译选项
+  "compilerOptions": {
+    "outDir": "build",  // 编译输出文件
+    "module": "esnext",  // 采用的模块化类型
+    "target": "ES5",  // 编译目标级别
+    "declaration": true,  // 为类型生成 .d.ts 声明文件
+    "jsx": "react",  // 让jsx|tsx文件 代替 react.createElement 
+    "moduleResolution": "node", // 支持从 node_module 查找绝对路径的依赖
+    "allowSyntheticDefaultImports": true  // 支持 default 的导出方式
+  }
+  // 编译包含路径
+  "include": [
+    "src"
+  ],
+  // 编译不包含的路径
+  "exclude": [
+    "src/**/*.test.tsx",
+    "src/**/*.stories.tsx",
+  ]
+}
+
+```
+
+### Typescript 处理绝对路径的坑
+
+ts 有几种 module 处理方式, 配置项为 :
+
+`moduleResolution`: 
+
+- classic(默认): 查找绝对路径的依赖从当前路径向上找到根目录, 在 node_module 的库会找不到
+- node:  支持从 node_module 查找绝对路径的依赖
+
+所以要配置 moduleResolution: true
+
+### Sass 文件编译
+
+配置npm script, 使用`node-sass` 编译 scss 入口文件
+
+```
+"build-scss": "node-sass ./src/styles/index.scss ./build/index.css",
+```
+
+### 其他
+
+#### 跨平台删除目录工具
+
+跨平台删除目录的工具[ `rimraf`](https://www.npmjs.com/package/rimraf):  The [UNIX command](http://en.wikipedia.org/wiki/Rm_(Unix)) `rm -rf` for node.
+
+npm scripts
+
+```
+"build": "npm run clean && npm run build-ts && npm run build-scss",
+"build-ts": "tsc -p tsconfig.build.json",
+"build-scss": "node-sass ./src/styles/index.scss ./build/index.css",
+"clean": "rimraf ./build"
+```
+
+#### Npm Link 本地测试组件库
+
+被link的一方, 如组件库: 
+
+`npm link`:  将本地的 package 创建软链接到全局的 node_modules 中
+
+link的一方, 如使用组件库的web app:
+
+`npm link xxx`: 将某个全局包 link 到自己的项目的  node_modules 中
+
+#### 引入组件库后出现invalid hook错误
+
+出现在 npm link 本地调试的情况: 由于存在两个版本的react (本地的react与link过来的组件库中的react), 所以出错
+
+解决方案一:
+
+在组件库的node_modules` link` Web app所使用的 react
 
 ## 知识点
 

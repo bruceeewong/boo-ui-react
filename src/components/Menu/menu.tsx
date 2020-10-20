@@ -1,4 +1,4 @@
-import React , { useState }from 'react'
+import React, { useState } from 'react'
 import classNames from 'classnames'
 import { MenuItemProps } from './menuItem'
 
@@ -10,45 +10,38 @@ export enum MenuMode {
 }
 
 export interface MenuProps {
-  className?: string;
-  mode?: MenuModeProp;
-  style?: React.CSSProperties;
-  defaultIndex?: string;
-  defaultOpenSubMenus?: string[];
-  onSelect?: SelectCallback;
+  className?: string
+  mode?: MenuModeProp
+  style?: React.CSSProperties
+  defaultIndex?: string
+  defaultOpenSubMenus?: string[]
+  onSelect?: SelectCallback
 }
 
 interface IMenuContext {
-  index?: string;
-  mode?: MenuModeProp,
-  defaultOpenSubMenus?: string[],
-  onSelect?: SelectCallback;
+  index?: string
+  mode?: MenuModeProp
+  defaultOpenSubMenus?: string[]
+  onSelect?: SelectCallback
 }
 
 export const MenuContext = React.createContext<IMenuContext>({})
 
 const Menu: React.FC<MenuProps> = (props) => {
-  const {
-    mode,
-    defaultIndex,
-    style,
-    className,
-    children,
-    onSelect,
-  } =  props
+  const { mode, defaultIndex, style, className, children, onSelect } = props
 
   const [activeIdx, setActiveIdx] = useState(defaultIndex)
 
   const classes = classNames(
     'b-menu',
-    {'b-menu--horizontal': mode === MenuMode.HORIZONTAL},
-    {'b-menu--vertical': mode === MenuMode.VERTICAL},
-    className,
+    { 'b-menu--horizontal': mode === MenuMode.HORIZONTAL },
+    { 'b-menu--vertical': mode === MenuMode.VERTICAL },
+    className
   )
 
   const handleSelect = (index: string) => {
     setActiveIdx(index)
-    
+
     if (onSelect) {
       onSelect(index)
     }
@@ -63,7 +56,9 @@ const Menu: React.FC<MenuProps> = (props) => {
 
   const renderChildren = () => {
     return React.Children.map(children, (child, i) => {
-      const childElement = child as React.FunctionComponentElement<MenuItemProps>
+      const childElement = child as React.FunctionComponentElement<
+        MenuItemProps
+      >
       const { displayName } = childElement.type
       if (displayName === 'MenuItem' || displayName === 'SubMenu') {
         // if not set prop index, then set a default
